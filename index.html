@@ -16,7 +16,7 @@
 </head>
 <body>
   <h1>숫자 증가 버튼</h1>
-  <button oneclick="increaseCount ()">+1 증가</button>
+  <button onclick="increaseCount ()">+1 증가</button>
   <div id="counter">0</div>
 
   <script>
@@ -24,7 +24,7 @@
 
     function increaseCount () {
       count++;
-      document.getElementById("count").textContent = count;
+      document.getElementById("counter").textContent = count;
     }
   </script>
 </body>
