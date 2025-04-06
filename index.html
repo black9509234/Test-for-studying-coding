@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTE-8"/>
+  <title>숫자 증가버튼</title>
+  <style>
+    button {
+      padding: 10px 20px;
+      font size: 16px;
+    }
+    #counter {
+     font size: 20px;
+     margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>숫자 증가 버튼</h1>
+  <button oneclick="increaseCount ()">+1 증가</button>
+  <div id="counter">0</div>
+
+  <script>
+    let count = 0;
+
+    function increaseCount () {
+      count++;
+      document.ElementById("count").textContent = count;
+    }
+  </script>
+</body>
+</html>
