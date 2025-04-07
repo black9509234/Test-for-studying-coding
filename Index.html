@@ -13,6 +13,15 @@
   </style>
 </head>
 <body>
-  <button class="box">버튼</button>
+  <button class="box" onclick="increaseCount ()">숫자: <span id="count">0</span> 버튼 </button>
+
+  <script>
+    let count= 0;
+
+    function increaseCount() {
+      count += 1;
+      document.getElementById("count").textContent = count;
+    }
+  </script>
 </body>
 </html>
