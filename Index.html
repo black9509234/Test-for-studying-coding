@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8"/>
-  <title>테스트</title>
+  <meta charset="UTF-8" />
+  <title>숫자 증가</title>
   <style>
-    .box {
-      padding: 20px 10px;
-      margin: 50px auto;
+    .count-display {
+      font-size: 48px;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .count-button {
       display: block;
-      font-size: 16px;
+      margin: 30px auto;
+      padding: 15px 30px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <button class="box" onclick="increaseCount ()">숫자: <span id="count">0</span> 버튼 </button>
+
+  <div class="count-display" id="count">0</div>
+
+  <button class="count-button" onclick="increaseCount()">+ 1 증가</button>
 
   <script>
-    let count= 0;
+    let count = 0;
 
     function increaseCount() {
       count += 1;
       document.getElementById("count").textContent = count;
     }
   </script>
+
 </body>
 </html>
