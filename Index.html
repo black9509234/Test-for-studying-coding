@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Diep.io 스타일 사각형</title>
+  <title>중앙 플레이어 + 떠다니는 사각형</title>
   <style>
     body {
       margin: 0;
@@ -26,6 +26,14 @@
     const NUM_SQUARES = 30;
     const squares = [];
 
+    // 플레이어 설정
+    const player = {
+      size: 40,
+      color: 'dodgerblue',
+      borderColor: 'black'
+    };
+
+    // 떠다니는 사각형들 생성
     for (let i = 0; i < NUM_SQUARES; i++) {
       squares.push({
         x: Math.random() * canvas.width,
@@ -39,36 +47,38 @@
     function update() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // 노란 사각형들 업데이트
       for (let square of squares) {
-        // 위치 업데이트
         square.x += square.dx;
         square.y += square.dy;
 
         // 벽 튕김
-        if (square.x < 0 || square.x + square.size > canvas.width) {
-          square.dx *= -1;
-        }
-        if (square.y < 0 || square.y + square.size > canvas.height) {
-          square.dy *= -1;
-        }
+        if (square.x < 0 || square.x + square.size > canvas.width) square.dx *= -1;
+        if (square.y < 0 || square.y + square.size > canvas.height) square.dy *= -1;
 
-        // 마찰처럼 부드럽게 움직임
+        // 부드러운 이동
         square.dx += (Math.random() - 0.5) * 0.2;
         square.dy += (Math.random() - 0.5) * 0.2;
 
-        // 속도 제한
         square.dx = Math.max(-1.5, Math.min(1.5, square.dx));
         square.dy = Math.max(-1.5, Math.min(1.5, square.dy));
 
-        // 그리기
+        // 노란 사각형 그리기
         ctx.fillStyle = 'yellow';
         ctx.fillRect(square.x, square.y, square.size, square.size);
-
-        // 테두리 추가 (Diep.io 느낌)
         ctx.strokeStyle = 'black';
         ctx.lineWidth = 2;
         ctx.strokeRect(square.x, square.y, square.size, square.size);
       }
+
+      // 플레이어 그리기 (중앙 고정)
+      const playerX = canvas.width / 2 - player.size / 2;
+      const playerY = canvas.height / 2 - player.size / 2;
+      ctx.fillStyle = player.color;
+      ctx.fillRect(playerX, playerY, player.size, player.size);
+      ctx.strokeStyle = player.borderColor;
+      ctx.lineWidth = 2;
+      ctx.strokeRect(playerX, playerY, player.size, player.size);
 
       requestAnimationFrame(update);
     }
