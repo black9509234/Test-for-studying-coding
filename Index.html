@@ -1,373 +1,169 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>스타 팩토리</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    
-    body {
+    html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
   font-family: 'Segoe UI', sans-serif;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-  background-size: cover;
   color: #fff;
-  margin: 0;
-  overflow-x: hidden;
 }
 
-    #background {
+#background {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
-  overflow: hidden;
   pointer-events: none;
+  overflow: hidden;
 }
 
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+}
 
-    .star {
-      width: 2px;
-      height: 2px;
-      background: white;
-      position: absolute;
-      border-radius: 50%;
-      animation: twinkle 2s infinite;
-      opacity: 0.8;
-    }
+.nav {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+}
 
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.3); }
-    }
+button {
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
 
-    #menu {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 10;
-    }
+.panel {
+  padding: 30px;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
 
-    #menu button {
-      margin: 4px;
-      padding: 8px 14px;
-      font-size: 14px;
-      border-radius: 6px;
-      border: none;
-      background-color: #333;
-      color: white;
-      cursor: pointer;
-    }
+.hidden {
+  display: none;
+}
 
-    #menu button:hover {
-      background-color: #555;
-    }
-
-    #gamePanel, #settingsPanel {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 60px 20px 40px;
-      display: none;
-    }
-
-    #gamePanel {
-      display: block;
-    }
-
-    h1, h2 {
-      margin-bottom: 10px;
-    }
-
-    p {
-      margin: 10px 0;
-    }
-
-    #star-btn {
-      font-size: 22px;
-      padding: 16px 32px;
-      margin: 20px 0;
-      cursor: pointer;
-      background: gold;
-      color: black;
-      border: none;
-      border-radius: 10px;
-    }
-
-    #shop {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      justify-content: center;
-      margin-top: 30px;
-    }
-
-    .shop-item {
-      background-color: #222;
-      padding: 15px;
-      border-radius: 10px;
-      width: 260px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.1);
-    }
-
-    .shop-item button {
-      width: 100%;
-      padding: 10px;
-      background-color: #444;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      cursor: pointer;
-      margin-top: 8px;
-    }
-
-    .shop-item button:hover {
-      background-color: #666;
-    }
-
-    #settingsPanel button {
-      margin: 10px;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 6px;
-      background-color: #444;
-      color: white;
-      cursor: pointer;
-    }
-
-    #settingsPanel button:hover {
-      background-color: #666;
-    }
-
-    .center {
-      text-align: center;
-    }
   </style>
 </head>
 <body>
   <div id="background"></div>
 
-  <div id="menu">
+  <div class="nav">
     <button onclick="showPanel('game')">게임</button>
     <button onclick="showPanel('settings')">설정</button>
   </div>
 
-  <div id="gamePanel" class="center">
+  <div id="game-panel" class="panel">
     <h1>스타 팩토리</h1>
-    <p>스타: <span id="stars">0</span></p>
-    <button id="star-btn">별 생성하기! (+<span id="starPerClick">1</span>)</button>
-    <p>초당 수익: <span id="starsPerSecond">0</span> ⭐</p>
-
-    <div id="shop">
-      <div class="shop-item">
-        <h3>클릭 업그레이드</h3>
-        <p>클릭당 스타: <span id="clickPower">1</span></p>
-        <button id="buyClickUpgrade">업그레이드 (가격: <span id="clickUpgradeCost">20</span>)</button>
-      </div>
-
-      <div class="shop-item">
-        <h3>망원경</h3>
-        <p>수량: <span id="cursorCount">0</span></p>
-        <p>생산량/개: <span id="cursorPower">2.0</span></p>
-        <button id="buyCursor">+1 망원경 (가격: <span id="cursorCost">10</span>)</button>
-        <button id="buyCursorUpgrade">업그레이드 (가격: <span id="cursorUpgradeCost">30</span>)</button>
-      </div>
-
-      <div class="shop-item">
-        <h3>위성</h3>
-        <p>수량: <span id="satelliteCount">0</span></p>
-        <button id="buySatellite">+1 위성 (가격: <span id="satelliteCost">100</span>)</button>
-      </div>
-
-      <div class="shop-item">
-        <h3>행성</h3>
-        <p>수량: <span id="planetCount">0</span></p>
-        <button id="buyPlanet">+1 행성 (가격: <span id="planetCost">1000</span>)</button>
-      </div>
-    </div>
+    <p>보유한 별: <span id="stars">0</span></p>
+    <button onclick="collectStar()">별 수집</button>
+    <p>망원경: <span id="telescopes">0</span></p>
+    <p>초당 생산량: <span id="perSecond">0</span></p>
+    <button onclick="buyTelescope()">망원경 구매 (50 별)</button>
   </div>
 
-  <div id="settingsPanel" class="center">
-    <h2>설정</h2>
+  <div id="settings-panel" class="panel hidden">
+    <h1>설정</h1>
     <button onclick="saveGame()">게임 저장</button>
     <button onclick="loadGame()">불러오기</button>
     <button onclick="resetGame()">초기화</button>
   </div>
 
-  <script>
+  <script src="script.js">
     let stars = 0;
+let telescopes = 0;
 
-    let starPerClick = 1;
-    let clickUpgradeCost = 20;
+function collectStar() {
+  stars++;
+  updateDisplay();
+}
 
-    let telescopes = 0;
-    let telescopeCost = 10;
-    let telescopePower = 0.2;
-    let telescopeUpgradeCost = 30;
-
-    let satellites = 0;
-    let satelliteCost = 100;
-    const satellitePower = 5;
-
-    let planets = 0;
-    let planetCost = 1000;
-    const planetPower = 50;
-
-    const starsDisplay = document.getElementById('stars');
-    const starPerClickDisplay = document.getElementById('starPerClick');
-    const clickPowerDisplay = document.getElementById('clickPower');
-    const clickUpgradeCostDisplay = document.getElementById('clickUpgradeCost');
-
-    const cursorCountDisplay = document.getElementById('cursorCount');
-    const cursorCostDisplay = document.getElementById('cursorCost');
-    const cursorPowerDisplay = document.getElementById('cursorPower');
-    const cursorUpgradeCostDisplay = document.getElementById('cursorUpgradeCost');
-
-    const satelliteCountDisplay = document.getElementById('satelliteCount');
-    const satelliteCostDisplay = document.getElementById('satelliteCost');
-
-    const planetCountDisplay = document.getElementById('planetCount');
-    const planetCostDisplay = document.getElementById('planetCost');
-
-    const starsPerSecondDisplay = document.getElementById('starsPerSecond');
-
-    document.getElementById('star-btn').addEventListener('click', () => {
-      stars += starPerClick;
-      updateDisplay();
-    });
-
-    document.getElementById('buyClickUpgrade').addEventListener('click', () => {
-      if (stars >= clickUpgradeCost) {
-        stars -= clickUpgradeCost;
-        starPerClick++;
-        clickUpgradeCost = Math.floor(clickUpgradeCost * 1.7);
-        updateDisplay();
-      }
-    });
-
-    document.getElementById('buyCursor').addEventListener('click', () => {
-      if (stars >= telescopeCost) {
-        stars -= telescopeCost;
-        telescopes++;
-        telescopeCost = Math.floor(telescopeCost * 1.5);
-        updateDisplay();
-      }
-    });
-
-    document.getElementById('buyCursorUpgrade').addEventListener('click', () => {
-      if (stars >= telescopeUpgradeCost) {
-        stars -= telescopeUpgradeCost;
-        telescopePower = parseFloat((telescopePower + 0.2).toFixed(2));
-        telescopeUpgradeCost = Math.floor(telescopeUpgradeCost * 2);
-        updateDisplay();
-      }
-    });
-
-    document.getElementById('buySatellite').addEventListener('click', () => {
-      if (stars >= satelliteCost) {
-        stars -= satelliteCost;
-        satellites++;
-        satelliteCost = Math.floor(satelliteCost * 1.4);
-        updateDisplay();
-      }
-    });
-
-    document.getElementById('buyPlanet').addEventListener('click', () => {
-      if (stars >= planetCost) {
-        stars -= planetCost;
-        planets++;
-        planetCost = Math.floor(planetCost * 1.4);
-        updateDisplay();
-      }
-    });
-
-    function updateDisplay() {
-      starsDisplay.textContent = Math.floor(stars);
-      starPerClickDisplay.textContent = starPerClick;
-      clickPowerDisplay.textContent = starPerClick;
-      clickUpgradeCostDisplay.textContent = clickUpgradeCost;
-
-      cursorCountDisplay.textContent = telescopes;
-      cursorCostDisplay.textContent = telescopeCost;
-      cursorPowerDisplay.textContent = (telescopePower * 10).toFixed(1);
-      cursorUpgradeCostDisplay.textContent = telescopeUpgradeCost;
-
-      satelliteCountDisplay.textContent = satellites;
-      satelliteCostDisplay.textContent = satelliteCost;
-
-      planetCountDisplay.textContent = planets;
-      planetCostDisplay.textContent = planetCost;
-
-      const sps = (
-        telescopes * telescopePower * 10 +
-        satellites * satellitePower +
-        planets * planetPower
-      ).toFixed(1);
-      starsPerSecondDisplay.textContent = sps;
-    }
-
-    setInterval(() => {
-      stars += telescopes * telescopePower;
-      stars += satellites * satellitePower / 10;
-      stars += planets * planetPower / 10;
-      updateDisplay();
-    }, 100);
-
-    function saveGame() {
-      const data = {
-        stars, starPerClick, clickUpgradeCost,
-        telescopes, telescopeCost, telescopePower, telescopeUpgradeCost,
-        satellites, satelliteCost,
-        planets, planetCost
-      };
-      localStorage.setItem('starFactorySave', JSON.stringify(data));
-    }
-
-    function loadGame() {
-      const save = localStorage.getItem('starFactorySave');
-      if (save) {
-        const data = JSON.parse(save);
-        stars = data.stars || 0;
-        starPerClick = data.starPerClick || 1;
-        clickUpgradeCost = data.clickUpgradeCost || 20;
-        telescopes = data.telescopes || 0;
-        telescopeCost = data.telescopeCost || 10;
-        telescopePower = data.telescopePower || 0.2;
-        telescopeUpgradeCost = data.telescopeUpgradeCost || 30;
-        satellites = data.satellites || 0;
-        satelliteCost = data.satelliteCost || 100;
-        planets = data.planets || 0;
-        planetCost = data.planetCost || 1000;
-        updateDisplay();
-      }
-    }
-
-    function resetGame() {
-      if (confirm("정말 초기화할까요?")) {
-        localStorage.removeItem('starFactorySave');
-        location.reload();
-      }
-    }
-
-    setInterval(saveGame, 10000);
-
-    function showPanel(panel) {
-      document.getElementById('gamePanel').style.display = (panel === 'game') ? 'block' : 'none';
-      document.getElementById('settingsPanel').style.display = (panel === 'settings') ? 'block' : 'none';
-    }
-
-    // 별 배경 생성
-    const background = document.getElementById('background');
-    for (let i = 0; i < 100; i++) {
-      const star = document.createElement('div');
-      star.classList.add('star');
-      star.style.top = Math.random() * window.innerHeight + 'px';
-      star.style.left = Math.random() * window.innerWidth + 'px';
-      star.style.animationDuration = (Math.random() * 2 + 1) + 's';
-      background.appendChild(star);
-    }
-
-    loadGame();
+function buyTelescope() {
+  if (stars >= 50) {
+    stars -= 50;
+    telescopes++;
     updateDisplay();
+  }
+}
+
+function updateDisplay() {
+  document.getElementById("stars").innerText = stars;
+  document.getElementById("telescopes").innerText = telescopes;
+  document.getElementById("perSecond").innerText = telescopes * 2;
+}
+
+function generateStars() {
+  stars += telescopes * 2;
+  updateDisplay();
+}
+setInterval(generateStars, 1000);
+
+function saveGame() {
+  const data = { stars, telescopes };
+  localStorage.setItem("starFactorySave", JSON.stringify(data));
+  alert("저장 완료!");
+}
+
+function loadGame() {
+  const data = JSON.parse(localStorage.getItem("starFactorySave"));
+  if (data) {
+    stars = data.stars;
+    telescopes = data.telescopes;
+    updateDisplay();
+    alert("불러오기 완료!");
+  } else {
+    alert("저장된 게임이 없습니다.");
+  }
+}
+
+function resetGame() {
+  if (confirm("정말 초기화할까요?")) {
+    stars = 0;
+    telescopes = 0;
+    updateDisplay();
+  }
+}
+
+function showPanel(name) {
+  document.getElementById("game-panel").classList.add("hidden");
+  document.getElementById("settings-panel").classList.add("hidden");
+  document.getElementById(`${name}-panel`).classList.remove("hidden");
+}
+
+function createStarsBackground() {
+  const background = document.getElementById('background');
+  for (let i = 0; i < 100; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.top = `${Math.random() * window.innerHeight}px`;
+    star.style.left = `${Math.random() * window.innerWidth}px`;
+    background.appendChild(star);
+  }
+}
+createStarsBackground();
+
+updateDisplay();
+
   </script>
 </body>
 </html>
