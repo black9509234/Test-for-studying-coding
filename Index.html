@@ -1,1 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>화려한 룰렛 게임</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1470&q=80');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-family: 'Arial', sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px gold;
+    }
+
+    #wheel {
+      width: 300px;
+      height: 300px;
+      border: 10px solid gold;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      animation: pulse 3s infinite;
+    }
+
+    .number {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      background: crimson;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-origin: 100% 100%;
+      font-size: 18px;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px gold; }
+      100% { box-shadow: 0 0 30px gold; }
+    }
+
+    #spin {
+      margin-top: 30px;
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(45deg, #f39c12, #d35400);
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #spin:hover {
+      background: linear-gradient(45deg, #f1c40f, #e67e22);
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: gold;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container">
+    <h1>룰렛을 돌려보세요!</h1>
+    <div id="wheel"></div>
+    <button id="spin">돌리기</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const wheel = document.getElementById('wheel');
+    const result = document.getElementById('result');
+    const spinBtn = document.getElementById('spin');
+
+    const numbers = [0, 1, 2, 3, 4, 5, 6, 7];
+    const anglePerNumber = 360 / numbers.length;
+
+    // 룰렛에 숫자 섹션 추가
+    numbers.forEach((num, i) => {
+      const el = document.createElement('div');
+      el.classList.add('number');
+      el.style.transform = `rotate(${i * anglePerNumber}deg) translate(-100%)`;
+      el.innerText = num;
+      wheel.appendChild(el);
+    });
+
+    let spinning = false;
+
+    spinBtn.addEventListener('click', () => {
+      if (spinning) return;
+      spinning = true;
+
+      const randDegree = Math.floor(Math.random() * 360 + 1080); // 최소 3바퀴
+      const selected = Math.floor(((360 - (randDegree % 360)) % 360) / anglePerNumber);
+      
+      wheel.style.transition = 'transform 4s ease-out';
+      wheel.style.transform = `rotate(${randDegree}deg)`;
+
+      setTimeout(() => {
+        result.innerText = `당첨 숫자: ${numbers[selected]}`;
+        spinning = false;
+      }, 4000);
+    });
+  </script>
+</body>
+</html>
 
