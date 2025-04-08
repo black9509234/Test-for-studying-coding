@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>중앙 플레이어 + 떠다니는 사각형</title>
+  <title>이동 가능한 플레이어</title>
   <style>
     body {
       margin: 0;
@@ -26,57 +26,87 @@
     const NUM_SQUARES = 30;
     const squares = [];
 
-    // 플레이어 설정
+    // 맵 기준 위치
+    const mapOffset = { x: 0, y: 0 };
+
+    // 플레이어
     const player = {
       size: 40,
-      color: 'dodgerblue',
-      borderColor: 'black'
+      speed: 3,
+      x: 0,
+      y: 0
     };
 
-    // 떠다니는 사각형들 생성
+    const keys = {
+      w: false,
+      a: false,
+      s: false,
+      d: false
+    };
+
+    // 노란 사각형 생성 (맵 기준 위치)
     for (let i = 0; i < NUM_SQUARES; i++) {
       squares.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
+        x: Math.random() * 3000 - 1500,
+        y: Math.random() * 3000 - 1500,
         size: 20 + Math.random() * 10,
         dx: (Math.random() - 0.5) * 1.5,
         dy: (Math.random() - 0.5) * 1.5,
       });
     }
 
+    // 키 입력 처리
+    window.addEventListener('keydown', (e) => {
+      if (e.key.toLowerCase() in keys) keys[e.key.toLowerCase()] = true;
+    });
+
+    window.addEventListener('keyup', (e) => {
+      if (e.key.toLowerCase() in keys) keys[e.key.toLowerCase()] = false;
+    });
+
     function update() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // 노란 사각형들 업데이트
+      // 플레이어 이동
+      if (keys.w) mapOffset.y += player.speed;
+      if (keys.s) mapOffset.y -= player.speed;
+      if (keys.a) mapOffset.x += player.speed;
+      if (keys.d) mapOffset.x -= player.speed;
+
+      // 노란 사각형들 위치 & 움직임 업데이트
       for (let square of squares) {
         square.x += square.dx;
         square.y += square.dy;
 
-        // 벽 튕김
-        if (square.x < 0 || square.x + square.size > canvas.width) square.dx *= -1;
-        if (square.y < 0 || square.y + square.size > canvas.height) square.dy *= -1;
+        // 벽 튕김 (맵 내부 한정 범위)
+        if (square.x < -1500 || square.x > 1500) square.dx *= -1;
+        if (square.y < -1500 || square.y > 1500) square.dy *= -1;
 
-        // 부드러운 이동
+        // 자연스러운 흔들림
         square.dx += (Math.random() - 0.5) * 0.2;
         square.dy += (Math.random() - 0.5) * 0.2;
 
         square.dx = Math.max(-1.5, Math.min(1.5, square.dx));
         square.dy = Math.max(-1.5, Math.min(1.5, square.dy));
 
-        // 노란 사각형 그리기
+        // 그리기 (플레이어 기준 위치로 변환해서 그리기)
+        const drawX = canvas.width / 2 + square.x + mapOffset.x;
+        const drawY = canvas.height / 2 + square.y + mapOffset.y;
+
         ctx.fillStyle = 'yellow';
-        ctx.fillRect(square.x, square.y, square.size, square.size);
+        ctx.fillRect(drawX, drawY, square.size, square.size);
         ctx.strokeStyle = 'black';
         ctx.lineWidth = 2;
-        ctx.strokeRect(square.x, square.y, square.size, square.size);
+        ctx.strokeRect(drawX, drawY, square.size, square.size);
       }
 
-      // 플레이어 그리기 (중앙 고정)
+      // 플레이어는 화면 중앙에 고정
       const playerX = canvas.width / 2 - player.size / 2;
       const playerY = canvas.height / 2 - player.size / 2;
-      ctx.fillStyle = player.color;
+
+      ctx.fillStyle = 'dodgerblue';
       ctx.fillRect(playerX, playerY, player.size, player.size);
-      ctx.strokeStyle = player.borderColor;
+      ctx.strokeStyle = 'black';
       ctx.lineWidth = 2;
       ctx.strokeRect(playerX, playerY, player.size, player.size);
 
