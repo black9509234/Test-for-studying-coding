@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>흔들리는 노란 사각형</title>
+  <title>Diep.io 스타일 사각형</title>
   <style>
     body {
       margin: 0;
@@ -20,45 +20,60 @@
   <script>
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
     const NUM_SQUARES = 30;
     const squares = [];
 
-    // 사각형 초기 위치 설정
     for (let i = 0; i < NUM_SQUARES; i++) {
-      const baseX = Math.random() * canvas.width;
-      const baseY = Math.random() * canvas.height;
       squares.push({
-        baseX,
-        baseY,
-        x: baseX,
-        y: baseY,
-        size: 30,
-        offsetAngle: Math.random() * Math.PI * 2,
-        speed: 0.02 + Math.random() * 0.02,
-        range: 3 + Math.random() * 2
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: 20 + Math.random() * 10,
+        dx: (Math.random() - 0.5) * 1.5,
+        dy: (Math.random() - 0.5) * 1.5,
       });
     }
 
-    function animate(time) {
+    function update() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (let square of squares) {
-        // 살짝살짝 흔들리는 위치 계산
-        square.x = square.baseX + Math.cos(time * square.speed + square.offsetAngle) * square.range;
-        square.y = square.baseY + Math.sin(time * square.speed + square.offsetAngle) * square.range;
+        // 위치 업데이트
+        square.x += square.dx;
+        square.y += square.dy;
 
+        // 벽 튕김
+        if (square.x < 0 || square.x + square.size > canvas.width) {
+          square.dx *= -1;
+        }
+        if (square.y < 0 || square.y + square.size > canvas.height) {
+          square.dy *= -1;
+        }
+
+        // 마찰처럼 부드럽게 움직임
+        square.dx += (Math.random() - 0.5) * 0.2;
+        square.dy += (Math.random() - 0.5) * 0.2;
+
+        // 속도 제한
+        square.dx = Math.max(-1.5, Math.min(1.5, square.dx));
+        square.dy = Math.max(-1.5, Math.min(1.5, square.dy));
+
+        // 그리기
         ctx.fillStyle = 'yellow';
         ctx.fillRect(square.x, square.y, square.size, square.size);
+
+        // 테두리 추가 (Diep.io 느낌)
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(square.x, square.y, square.size, square.size);
       }
 
-      requestAnimationFrame(animate);
+      requestAnimationFrame(update);
     }
 
-    requestAnimationFrame(animate);
+    update();
   </script>
 </body>
 </html>
