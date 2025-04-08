@@ -88,6 +88,13 @@
     <p>초당 수익: <span id="starsPerSecond">0</span> ⭐</p>
   </div>
 
+  <div id="save-controls">
+  <h2>저장 관리</h2>
+  <button onclick="saveGame()">저장</button>
+  <button onclick="loadGame()">불러오기</button>
+  <button onclick="resetGame()">초기화</button>
+</div>
+
   <script>
     let stars = 0;
 
@@ -180,6 +187,49 @@
       star.style.animationDuration = (Math.random() * 2 + 1) + 's';
       document.body.appendChild(star);
     }
+
+    function saveGame() {
+  const saveData = {
+    stars,
+    starPerClick,
+    clickUpgradeCost,
+    telescopes,
+    telescopeCost,
+    telescopePower,
+    telescopeUpgradeCost
+  };
+  localStorage.setItem('starFactorySave', JSON.stringify(saveData));
+  alert("게임이 저장되었습니다!");
+}
+
+function loadGame() {
+  const saved = localStorage.getItem('starFactorySave');
+  if (saved) {
+    const data = JSON.parse(saved);
+    stars = data.stars || 0;
+    starPerClick = data.starPerClick || 1;
+    clickUpgradeCost = data.clickUpgradeCost || 20;
+    telescopes = data.telescopes || 0;
+    telescopeCost = data.telescopeCost || 10;
+    telescopePower = data.telescopePower || 0.2;
+    telescopeUpgradeCost = data.telescopeUpgradeCost || 30;
+    updateDisplay();
+    alert("불러오기 완료!");
+  } else {
+    alert("저장된 게임이 없습니다.");
+  }
+}
+
+function resetGame() {
+  if (confirm("정말로 초기화할까요?")) {
+    localStorage.removeItem('starFactorySave');
+    location.reload();
+  }
+}
+
+    // 10초마다 자동 저장
+setInterval(saveGame, 10000);
+
   </script>
 </body>
 </html>
