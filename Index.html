@@ -6,10 +6,15 @@
   <style>
     body {
       font-family: sans-serif;
-      background: #0b0c1a;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       color: #fff;
       text-align: center;
       padding-top: 50px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
     }
 
     #star-btn {
@@ -35,6 +40,23 @@
 
     #shop button:hover {
       background: #666;
+    }
+
+    /* 별 애니메이션 */
+    .star {
+      width: 2px;
+      height: 2px;
+      background: white;
+      position: absolute;
+      border-radius: 50%;
+      animation: twinkle 2s infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.3); }
+      100% { opacity: 0.2; transform: scale(1); }
     }
   </style>
 </head>
@@ -142,6 +164,16 @@
     }, 100);
 
     updateDisplay();
+
+    // 별 깜빡이는 배경 생성
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.top = Math.random() * window.innerHeight + 'px';
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      star.style.animationDuration = (Math.random() * 2 + 1) + 's';
+      document.body.appendChild(star);
+    }
   </script>
 </body>
 </html>
