@@ -2,55 +2,73 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>수제 룰렛 게임</title>
+  <title>럭키 룰렛 보상 게임</title>
   <style>
+    /* --- 배경 이펙트 --- */
     body {
       margin: 0;
       padding: 0;
       height: 100vh;
-      background: radial-gradient(circle at center, #2c3e50 0%, #000 100%);
+      background: linear-gradient(135deg, #1b1b2f, #162447);
       overflow: hidden;
       font-family: 'Arial', sans-serif;
+      position: relative;
+      color: white;
     }
 
-    .casino-lights {
+    .background-glow {
       position: absolute;
-      top: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
-      background: repeating-radial-gradient(circle at center, rgba(255,215,0,0.05), rgba(255,215,0,0.1) 10px, transparent 20px);
-      animation: pulseGlow 5s infinite;
+      background: radial-gradient(circle at center, rgba(255, 215, 0, 0.1), transparent 70%);
+      animation: glow 5s infinite alternate;
       z-index: 0;
     }
 
-    @keyframes pulseGlow {
-      0% { opacity: 0.4; }
-      50% { opacity: 0.7; }
-      100% { opacity: 0.4; }
+    @keyframes glow {
+      0% { opacity: 0.2; }
+      100% { opacity: 0.5; }
     }
 
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      background-image: radial-gradient(white 1px, transparent 1px);
+      background-size: 20px 20px;
+      opacity: 0.15;
+      z-index: 0;
+      animation: sparkle 3s linear infinite;
+    }
+
+    @keyframes sparkle {
+      0% { background-position: 0 0; }
+      100% { background-position: 20px 20px; }
+    }
+
+    /* --- 룰렛 게임 본체 --- */
     .container {
-      z-index: 1;
       position: relative;
+      z-index: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
+      text-align: center;
     }
 
     h1 {
       color: gold;
       font-size: 3em;
-      text-shadow: 2px 2px 10px #ffcc00;
+      text-shadow: 2px 2px 12px #ffcc00;
     }
 
     .wheel-wrapper {
       position: relative;
-      width: 360px;
-      height: 360px;
-      margin-top: 30px;
+      width: 400px;
+      height: 400px;
     }
 
     #wheel {
@@ -60,17 +78,34 @@
       border: 6px solid gold;
       position: relative;
       transition: transform 4s ease-out;
-      box-shadow: 0 0 30px gold;
+      box-shadow: 0 0 40px gold;
       background: conic-gradient(
-        crimson 0deg 45deg,
-        black 45deg 90deg,
-        crimson 90deg 135deg,
-        black 135deg 180deg,
-        crimson 180deg 225deg,
-        black 225deg 270deg,
-        crimson 270deg 315deg,
-        black 315deg 360deg
+        #e74c3c 0deg 45deg,
+        #2ecc71 45deg 90deg,
+        #3498db 90deg 135deg,
+        #f1c40f 135deg 180deg,
+        #e67e22 180deg 225deg,
+        #9b59b6 225deg 270deg,
+        #1abc9c 270deg 315deg,
+        #ff6f61 315deg 360deg
       );
+    }
+
+    .segment-label {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      left: 50%;
+      top: 50%;
+      transform-origin: 0% 0%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      color: white;
+      text-shadow: 1px 1px 5px black;
     }
 
     .pointer {
@@ -90,18 +125,17 @@
       margin-top: 40px;
       padding: 15px 40px;
       font-size: 1.2em;
-      background: linear-gradient(to right, #e67e22, #d35400);
+      background: linear-gradient(to right, #f39c12, #e67e22);
       border: none;
       border-radius: 10px;
       color: white;
       cursor: pointer;
       transition: 0.3s;
-      box-shadow: 0 0 10px #d35400;
+      box-shadow: 0 0 15px #f39c12;
     }
 
     button:hover {
-      background: linear-gradient(to right, #f39c12, #e67e22);
-      box-shadow: 0 0 20px #f39c12;
+      background: linear-gradient(to right, #f1c40f, #f39c12);
     }
 
     #result {
@@ -113,9 +147,11 @@
   </style>
 </head>
 <body>
-  <div class="casino-lights"></div>
+  <div class="background-glow"></div>
+  <div class="stars"></div>
+
   <div class="container">
-    <h1>수제 룰렛 게임</h1>
+    <h1>럭키 룰렛 보상 게임</h1>
     <div class="wheel-wrapper">
       <div class="pointer"></div>
       <div id="wheel"></div>
@@ -129,8 +165,27 @@
     const result = document.getElementById('result');
     const spinBtn = document.getElementById('spin');
 
-    const slots = ['0', '1', '2', '3', '4', '5', '6', '7'];
-    const anglePerSlot = 360 / slots.length;
+    const prizes = [
+      '500코인',
+      '꽝!',
+      '보너스 게임',
+      '1000코인',
+      '다시 돌리기',
+      '행운의 아이템',
+      '200코인',
+      '2배 보상'
+    ];
+
+    const anglePerSlot = 360 / prizes.length;
+
+    // 텍스트 레이블 직접 추가
+    prizes.forEach((text, i) => {
+      const label = document.createElement('div');
+      label.className = 'segment-label';
+      label.style.transform = `rotate(${i * anglePerSlot}deg) translate(0, -170px)`;
+      label.innerText = text;
+      wheel.appendChild(label);
+    });
 
     let spinning = false;
 
@@ -138,13 +193,13 @@
       if (spinning) return;
       spinning = true;
 
-      const rotation = 360 * 5 + Math.floor(Math.random() * 360); // 최소 5바퀴
+      const rotation = 360 * 5 + Math.floor(Math.random() * 360);
       wheel.style.transform = `rotate(${rotation}deg)`;
 
       setTimeout(() => {
         const normalized = rotation % 360;
         const index = Math.floor(((360 - normalized) % 360) / anglePerSlot);
-        result.textContent = `당첨 숫자: ${slots[index]}`;
+        result.textContent = `당신의 보상: ${prizes[index]}`;
         spinning = false;
       }, 4000);
     });
