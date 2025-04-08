@@ -1,50 +1,65 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>숫자 증가 버튼</title>
+  <title>움직이는 사각형들</title>
   <style>
     body {
       margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      flex-direction: column;
+      overflow: hidden;
+      background: white;
     }
-
-    #number {
-      font-size: 5rem;
-      margin-bottom: 30px;
-    }
-
-    #incrementButton {
-      padding: 15px 30px;
-      border: none;
-      border-radius: 8px;
-      background-color: #007bff;
-      color: white;
-      transition: background-color 0.3s;
+    canvas {
+      display: block;
     }
   </style>
 </head>
 <body>
-
-  <div id="number">0</div>
-  <button id="incrementButton">숫자 증가</button>
+  <canvas id="canvas"></canvas>
 
   <script>
-    const numberElement = document.getElementById('number');
-    const button = document.getElementById('incrementButton');
-    let count = 0;
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
 
-    button.addEventListener('click', () => {
-      count += 1;
-      numberElement.textContent = count;
-    });
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const NUM_SQUARES = 20;
+    const squares = [];
+
+    // 사각형 생성
+    for (let i = 0; i < NUM_SQUARES; i++) {
+      squares.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: 30 + Math.random() * 20,
+        dx: (Math.random() - 0.5) * 2,
+        dy: (Math.random() - 0.5) * 2,
+        color: `hsl(${Math.random() * 360}, 60%, 60%)`
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let square of squares) {
+        // 위치 업데이트
+        square.x += square.dx;
+        square.y += square.dy;
+
+        // 경계 충돌
+        if (square.x < 0 || square.x + square.size > canvas.width) square.dx *= -1;
+        if (square.y < 0 || square.y + square.size > canvas.height) square.dy *= -1;
+
+        // 사각형 그리기
+        ctx.fillStyle = square.color;
+        ctx.fillRect(square.x, square.y, square.size, square.size);
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
   </script>
-
 </body>
 </html>
