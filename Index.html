@@ -8,19 +8,33 @@
       font-family: sans-serif;
       background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       color: #fff;
-      text-align: center;
-      padding-top: 50px;
-      background-repeat: no-repeat;
-      background-size: cover;
-      height: 100vh;
+      padding-top: 60px;
+      margin: 0;
       overflow: hidden;
-      position: relative;
+    }
+
+    #menu {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+    }
+
+    #menu button {
+      margin: 3px;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+
+    #gamePanel, #settingsPanel {
+      text-align: center;
+      transition: all 0.3s ease;
     }
 
     #star-btn {
       font-size: 24px;
       padding: 20px 40px;
-      margin-bottom: 20px;
+      margin: 20px;
       cursor: pointer;
       background: gold;
       color: black;
@@ -42,7 +56,6 @@
       background: #666;
     }
 
-    /* 별 애니메이션 */
     .star {
       width: 2px;
       height: 2px;
@@ -61,71 +74,79 @@
   </style>
 </head>
 <body>
-  <h1>스타 팩토리</h1>
-  <p>스타: <span id="stars">0</span></p>
 
-  <button id="star-btn">별 생성하기! (+<span id="starPerClick">1</span>)</button>
-
-  <div id="shop">
-    <h2>업그레이드</h2>
-
-    <button id="buyClickUpgrade">
-      별 생성기 업그레이드 (가격: <span id="clickUpgradeCost">20</span>)
-    </button>
-    <p>클릭당 스타: <span id="clickPower">1</span></p>
-
-    <button id="buyCursor">
-      망원경 +1 (가격: <span id="cursorCost">10</span>)
-    </button>
-    <p>망원경 수: <span id="cursorCount">0</span></p>
-
-    <button id="buyCursorUpgrade">
-      망원경 업그레이드 (가격: <span id="cursorUpgradeCost">30</span>)
-    </button>
-    <p>망원경 생산량: <span id="cursorPower">0.2</span> / 개</p>
-
-    <!-- 초당 수익 표시 -->
-    <p>초당 수익: <span id="starsPerSecond">0</span> ⭐</p>
+  <!-- 메뉴 -->
+  <div id="menu">
+    <button onclick="showPanel('game')">게임</button>
+    <button onclick="showPanel('settings')">설정</button>
   </div>
 
-  <div id="save-controls">
-  <h2>저장 관리</h2>
-  <button onclick="saveGame()">저장</button>
-  <button onclick="loadGame()">불러오기</button>
-  <button onclick="resetGame()">초기화</button>
-</div>
-  
-  <button id="buySatellite">
-  위성 +1 (가격: <span id="satelliteCost">100</span>)
-</button>
-<p>위성 수: <span id="satelliteCount">0</span></p>
+  <!-- 게임 창 -->
+  <div id="gamePanel">
+    <h1>스타 팩토리</h1>
+    <p>스타: <span id="stars">0</span></p>
+    <button id="star-btn">별 생성하기! (+<span id="starPerClick">1</span>)</button>
 
-<button id="buyPlanet">
-  행성 +1 (가격: <span id="planetCost">1000</span>)
-</button>
-<p>행성 수: <span id="planetCount">0</span></p>
+    <div id="shop">
+      <h2>업그레이드</h2>
+
+      <button id="buyClickUpgrade">
+        별 생성기 업그레이드 (가격: <span id="clickUpgradeCost">20</span>)
+      </button>
+      <p>클릭당 스타: <span id="clickPower">1</span></p>
+
+      <button id="buyCursor">
+        망원경 +1 (가격: <span id="cursorCost">10</span>)
+      </button>
+      <p>망원경 수: <span id="cursorCount">0</span></p>
+
+      <button id="buyCursorUpgrade">
+        망원경 업그레이드 (가격: <span id="cursorUpgradeCost">30</span>)
+      </button>
+      <p>망원경 생산량: <span id="cursorPower">2.0</span> / 개</p>
+
+      <button id="buySatellite">
+        위성 +1 (가격: <span id="satelliteCost">100</span>)
+      </button>
+      <p>위성 수: <span id="satelliteCount">0</span></p>
+
+      <button id="buyPlanet">
+        행성 +1 (가격: <span id="planetCost">1000</span>)
+      </button>
+      <p>행성 수: <span id="planetCount">0</span></p>
+
+      <p>초당 수익: <span id="starsPerSecond">0</span> ⭐</p>
+    </div>
+  </div>
+
+  <!-- 설정 창 -->
+  <div id="settingsPanel" style="display: none;">
+    <h2>설정</h2>
+    <button onclick="saveGame()">저장</button>
+    <button onclick="loadGame()">불러오기</button>
+    <button onclick="resetGame()">초기화</button>
+  </div>
 
   <script>
     let stars = 0;
 
-    // 클릭 관련
     let starPerClick = 1;
     let clickUpgradeCost = 20;
 
-    // 망원경 관련
     let telescopes = 0;
     let telescopeCost = 10;
-    let telescopePower = 0.2;
+    let telescopePower = 0.2; // 실제 초당 2개 = 0.2 * 10
     let telescopeUpgradeCost = 30;
 
     let satellites = 0;
-let satelliteCost = 100;
-const satellitePower = 5;
+    let satelliteCost = 100;
+    const satellitePower = 5;
 
-let planets = 0;
-let planetCost = 1000;
-const planetPower = 50;
+    let planets = 0;
+    let planetCost = 1000;
+    const planetPower = 50;
 
+    // DOM
     const starsDisplay = document.getElementById('stars');
     const starPerClickDisplay = document.getElementById('starPerClick');
     const clickPowerDisplay = document.getElementById('clickPower');
@@ -133,19 +154,18 @@ const planetPower = 50;
 
     const cursorCountDisplay = document.getElementById('cursorCount');
     const cursorCostDisplay = document.getElementById('cursorCost');
-
     const cursorPowerDisplay = document.getElementById('cursorPower');
     const cursorUpgradeCostDisplay = document.getElementById('cursorUpgradeCost');
 
+    const satelliteCountDisplay = document.getElementById('satelliteCount');
+    const satelliteCostDisplay = document.getElementById('satelliteCost');
+
+    const planetCountDisplay = document.getElementById('planetCount');
+    const planetCostDisplay = document.getElementById('planetCost');
+
     const starsPerSecondDisplay = document.getElementById('starsPerSecond');
 
-    const satelliteCountDisplay = document.getElementById('satelliteCount');
-const satelliteCostDisplay = document.getElementById('satelliteCost');
-
-const planetCountDisplay = document.getElementById('planetCount');
-const planetCostDisplay = document.getElementById('planetCost');
-
-
+    // 버튼 이벤트
     document.getElementById('star-btn').addEventListener('click', () => {
       stars += starPerClick;
       updateDisplay();
@@ -178,6 +198,25 @@ const planetCostDisplay = document.getElementById('planetCost');
       }
     });
 
+    document.getElementById('buySatellite').addEventListener('click', () => {
+      if (stars >= satelliteCost) {
+        stars -= satelliteCost;
+        satellites++;
+        satelliteCost = Math.floor(satelliteCost * 1.4);
+        updateDisplay();
+      }
+    });
+
+    document.getElementById('buyPlanet').addEventListener('click', () => {
+      if (stars >= planetCost) {
+        stars -= planetCost;
+        planets++;
+        planetCost = Math.floor(planetCost * 1.4);
+        updateDisplay();
+      }
+    });
+
+    // UI 업데이트
     function updateDisplay() {
       starsDisplay.textContent = Math.floor(stars);
       starPerClickDisplay.textContent = starPerClick;
@@ -186,24 +225,82 @@ const planetCostDisplay = document.getElementById('planetCost');
 
       cursorCountDisplay.textContent = telescopes;
       cursorCostDisplay.textContent = telescopeCost;
-
-      cursorPowerDisplay.textContent = telescopePower.toFixed(2);
+      cursorPowerDisplay.textContent = (telescopePower * 10).toFixed(1); // 초당으로 환산
       cursorUpgradeCostDisplay.textContent = telescopeUpgradeCost;
 
-      // 초당 생산량 업데이트
-      const sps = (telescopes * telescopePower * 10).toFixed(1);
+      satelliteCountDisplay.textContent = satellites;
+      satelliteCostDisplay.textContent = satelliteCost;
+
+      planetCountDisplay.textContent = planets;
+      planetCostDisplay.textContent = planetCost;
+
+      const sps = (
+        telescopes * telescopePower * 10 +
+        satellites * satellitePower +
+        planets * planetPower
+      ).toFixed(1);
       starsPerSecondDisplay.textContent = sps;
     }
 
-    // 자동 수익
+    // 자동 수익 (0.1초마다)
     setInterval(() => {
       stars += telescopes * telescopePower;
+      stars += satellites * satellitePower / 10;
+      stars += planets * planetPower / 10;
       updateDisplay();
     }, 100);
 
-    updateDisplay();
+    // 저장 / 불러오기 / 초기화
+    function saveGame() {
+      const data = {
+        stars, starPerClick, clickUpgradeCost,
+        telescopes, telescopeCost, telescopePower, telescopeUpgradeCost,
+        satellites, satelliteCost,
+        planets, planetCost
+      };
+      localStorage.setItem('starFactorySave', JSON.stringify(data));
+    }
 
-    // 별 깜빡이는 배경 생성
+    function loadGame() {
+      const save = localStorage.getItem('starFactorySave');
+      if (save) {
+        const data = JSON.parse(save);
+        stars = data.stars || 0;
+        starPerClick = data.starPerClick || 1;
+        clickUpgradeCost = data.clickUpgradeCost || 20;
+
+        telescopes = data.telescopes || 0;
+        telescopeCost = data.telescopeCost || 10;
+        telescopePower = data.telescopePower || 0.2;
+        telescopeUpgradeCost = data.telescopeUpgradeCost || 30;
+
+        satellites = data.satellites || 0;
+        satelliteCost = data.satelliteCost || 100;
+
+        planets = data.planets || 0;
+        planetCost = data.planetCost || 1000;
+
+        updateDisplay();
+      }
+    }
+
+    function resetGame() {
+      if (confirm("정말 초기화할까요?")) {
+        localStorage.removeItem('starFactorySave');
+        location.reload();
+      }
+    }
+
+    // 자동 저장
+    setInterval(saveGame, 10000);
+
+    // 화면 전환
+    function showPanel(panel) {
+      document.getElementById('gamePanel').style.display = (panel === 'game') ? 'block' : 'none';
+      document.getElementById('settingsPanel').style.display = (panel === 'settings') ? 'block' : 'none';
+    }
+
+    // 별 배경 생성
     for (let i = 0; i < 100; i++) {
       const star = document.createElement('div');
       star.classList.add('star');
@@ -213,87 +310,9 @@ const planetCostDisplay = document.getElementById('planetCost');
       document.body.appendChild(star);
     }
 
-    function saveGame() {
-  const saveData = {
-    stars,
-    starPerClick,
-    clickUpgradeCost,
-    telescopes,
-    telescopeCost,
-    telescopePower,
-    telescopeUpgradeCost
-  };
-  localStorage.setItem('starFactorySave', JSON.stringify(saveData));
-  alert("게임이 저장되었습니다!");
-}
-
-function loadGame() {
-  const saved = localStorage.getItem('starFactorySave');
-  if (saved) {
-    const data = JSON.parse(saved);
-    stars = data.stars || 0;
-    starPerClick = data.starPerClick || 1;
-    clickUpgradeCost = data.clickUpgradeCost || 20;
-    telescopes = data.telescopes || 0;
-    telescopeCost = data.telescopeCost || 10;
-    telescopePower = data.telescopePower || 0.2;
-    telescopeUpgradeCost = data.telescopeUpgradeCost || 30;
+    // 최초 실행
+    loadGame();
     updateDisplay();
-    alert("불러오기 완료!");
-  } else {
-    alert("저장된 게임이 없습니다.");
-  }
-}
-
-function resetGame() {
-  if (confirm("정말로 초기화할까요?")) {
-    localStorage.removeItem('starFactorySave');
-    location.reload();
-  }
-}
-
-    // 10초마다 자동 저장
-setInterval(saveGame, 10000);
-
-    document.getElementById('buySatellite').addEventListener('click', () => {
-  if (stars >= satelliteCost) {
-    stars -= satelliteCost;
-    satellites++;
-    satelliteCost = Math.floor(satelliteCost * 1.4);
-    updateDisplay();
-  }
-});
-
-document.getElementById('buyPlanet').addEventListener('click', () => {
-  if (stars >= planetCost) {
-    stars -= planetCost;
-    planets++;
-    planetCost = Math.floor(planetCost * 1.4);
-    updateDisplay();
-  }
-});
-
-    setInterval(() => {
-  stars += telescopes * telescopePower;
-  stars += satellites * satellitePower / 10;
-  stars += planets * planetPower / 10;
-  updateDisplay();
-}, 100);
-
-    satelliteCountDisplay.textContent = satellites;
-satelliteCostDisplay.textContent = satelliteCost;
-
-planetCountDisplay.textContent = planets;
-planetCostDisplay.textContent = planetCost;
-
-const sps = (
-  telescopes * telescopePower * 10 +
-  satellites * satellitePower +
-  planets * planetPower
-).toFixed(1);
-starsPerSecondDisplay.textContent = sps;
-
-
   </script>
 </body>
 </html>
