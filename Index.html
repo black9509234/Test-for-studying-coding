@@ -69,23 +69,23 @@
   <div id="shop">
     <h2>업그레이드</h2>
 
-    <!-- 클릭 업그레이드 -->
     <button id="buyClickUpgrade">
       별 생성기 업그레이드 (가격: <span id="clickUpgradeCost">20</span>)
     </button>
     <p>클릭당 스타: <span id="clickPower">1</span></p>
 
-    <!-- 망원경 구매 -->
     <button id="buyCursor">
       망원경 +1 (가격: <span id="cursorCost">10</span>)
     </button>
     <p>망원경 수: <span id="cursorCount">0</span></p>
 
-    <!-- 망원경 업그레이드 -->
     <button id="buyCursorUpgrade">
       망원경 업그레이드 (가격: <span id="cursorUpgradeCost">30</span>)
     </button>
     <p>망원경 생산량: <span id="cursorPower">0.2</span> / 개</p>
+
+    <!-- 초당 수익 표시 -->
+    <p>초당 수익: <span id="starsPerSecond">0</span> ⭐</p>
   </div>
 
   <script>
@@ -111,6 +111,8 @@
 
     const cursorPowerDisplay = document.getElementById('cursorPower');
     const cursorUpgradeCostDisplay = document.getElementById('cursorUpgradeCost');
+
+    const starsPerSecondDisplay = document.getElementById('starsPerSecond');
 
     document.getElementById('star-btn').addEventListener('click', () => {
       stars += starPerClick;
@@ -155,6 +157,10 @@
 
       cursorPowerDisplay.textContent = telescopePower.toFixed(2);
       cursorUpgradeCostDisplay.textContent = telescopeUpgradeCost;
+
+      // 초당 생산량 업데이트
+      const sps = (telescopes * telescopePower * 10).toFixed(1);
+      starsPerSecondDisplay.textContent = sps;
     }
 
     // 자동 수익
