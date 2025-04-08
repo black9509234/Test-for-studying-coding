@@ -85,7 +85,7 @@
     <button id="buyCursorUpgrade">
       망원경 업그레이드 (가격: <span id="cursorUpgradeCost">30</span>)
     </button>
-    <p>망원경 생산량: <span id="cursorPower">0.2</span> / 개</p>
+    <p>망원경 생산량: <span id="cursorPower">2</span> / 개</p>
   </div>
 
   <script>
@@ -161,7 +161,7 @@
     setInterval(() => {
       stars += telescopes * telescopePower;
       updateDisplay();
-    }, 1000);
+    }, 100);
 
     updateDisplay();
 
