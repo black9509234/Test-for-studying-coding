@@ -2,103 +2,124 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>화려한 룰렛 게임</title>
+  <title>수제 룰렛 게임</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1470&q=80');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      font-family: 'Arial', sans-serif;
-      color: white;
+      height: 100vh;
+      background: radial-gradient(circle at center, #2c3e50 0%, #000 100%);
       overflow: hidden;
+      font-family: 'Arial', sans-serif;
     }
 
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.6);
+    .casino-lights {
       position: absolute;
       top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: repeating-radial-gradient(circle at center, rgba(255,215,0,0.05), rgba(255,215,0,0.1) 10px, transparent 20px);
+      animation: pulseGlow 5s infinite;
+      z-index: 0;
+    }
+
+    @keyframes pulseGlow {
+      0% { opacity: 0.4; }
+      50% { opacity: 0.7; }
+      100% { opacity: 0.4; }
     }
 
     .container {
+      z-index: 1;
       position: relative;
-      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      text-align: center;
     }
 
     h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 8px gold;
+      color: gold;
+      font-size: 3em;
+      text-shadow: 2px 2px 10px #ffcc00;
+    }
+
+    .wheel-wrapper {
+      position: relative;
+      width: 360px;
+      height: 360px;
+      margin-top: 30px;
     }
 
     #wheel {
-      width: 300px;
-      height: 300px;
-      border: 10px solid gold;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
+      border: 6px solid gold;
       position: relative;
-      overflow: hidden;
-      animation: pulse 3s infinite;
+      transition: transform 4s ease-out;
+      box-shadow: 0 0 30px gold;
+      background: conic-gradient(
+        crimson 0deg 45deg,
+        black 45deg 90deg,
+        crimson 90deg 135deg,
+        black 135deg 180deg,
+        crimson 180deg 225deg,
+        black 225deg 270deg,
+        crimson 270deg 315deg,
+        black 315deg 360deg
+      );
     }
 
-    .number {
+    .pointer {
+      width: 0; 
+      height: 0; 
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 30px solid gold;
       position: absolute;
-      width: 50%;
-      height: 50%;
-      background: crimson;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transform-origin: 100% 100%;
-      font-size: 18px;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
     }
 
-    @keyframes pulse {
-      0% { box-shadow: 0 0 10px gold; }
-      100% { box-shadow: 0 0 30px gold; }
-    }
-
-    #spin {
-      margin-top: 30px;
-      padding: 15px 30px;
-      font-size: 20px;
+    button {
+      margin-top: 40px;
+      padding: 15px 40px;
+      font-size: 1.2em;
+      background: linear-gradient(to right, #e67e22, #d35400);
       border: none;
       border-radius: 10px;
-      background: linear-gradient(45deg, #f39c12, #d35400);
       color: white;
       cursor: pointer;
       transition: 0.3s;
+      box-shadow: 0 0 10px #d35400;
     }
 
-    #spin:hover {
-      background: linear-gradient(45deg, #f1c40f, #e67e22);
+    button:hover {
+      background: linear-gradient(to right, #f39c12, #e67e22);
+      box-shadow: 0 0 20px #f39c12;
     }
 
     #result {
       margin-top: 20px;
-      font-size: 24px;
-      font-weight: bold;
-      color: gold;
+      font-size: 1.5em;
+      color: #f1c40f;
+      text-shadow: 1px 1px 5px black;
     }
   </style>
 </head>
 <body>
-  <div class="overlay"></div>
+  <div class="casino-lights"></div>
   <div class="container">
-    <h1>룰렛을 돌려보세요!</h1>
-    <div id="wheel"></div>
+    <h1>수제 룰렛 게임</h1>
+    <div class="wheel-wrapper">
+      <div class="pointer"></div>
+      <div id="wheel"></div>
+    </div>
     <button id="spin">돌리기</button>
     <div id="result"></div>
   </div>
@@ -108,17 +129,8 @@
     const result = document.getElementById('result');
     const spinBtn = document.getElementById('spin');
 
-    const numbers = [0, 1, 2, 3, 4, 5, 6, 7];
-    const anglePerNumber = 360 / numbers.length;
-
-    // 룰렛에 숫자 섹션 추가
-    numbers.forEach((num, i) => {
-      const el = document.createElement('div');
-      el.classList.add('number');
-      el.style.transform = `rotate(${i * anglePerNumber}deg) translate(-100%)`;
-      el.innerText = num;
-      wheel.appendChild(el);
-    });
+    const slots = ['0', '1', '2', '3', '4', '5', '6', '7'];
+    const anglePerSlot = 360 / slots.length;
 
     let spinning = false;
 
@@ -126,18 +138,16 @@
       if (spinning) return;
       spinning = true;
 
-      const randDegree = Math.floor(Math.random() * 360 + 1080); // 최소 3바퀴
-      const selected = Math.floor(((360 - (randDegree % 360)) % 360) / anglePerNumber);
-      
-      wheel.style.transition = 'transform 4s ease-out';
-      wheel.style.transform = `rotate(${randDegree}deg)`;
+      const rotation = 360 * 5 + Math.floor(Math.random() * 360); // 최소 5바퀴
+      wheel.style.transform = `rotate(${rotation}deg)`;
 
       setTimeout(() => {
-        result.innerText = `당첨 숫자: ${numbers[selected]}`;
+        const normalized = rotation % 360;
+        const index = Math.floor(((360 - normalized) % 360) / anglePerSlot);
+        result.textContent = `당첨 숫자: ${slots[index]}`;
         spinning = false;
       }, 4000);
     });
   </script>
 </body>
 </html>
-
