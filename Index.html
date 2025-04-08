@@ -49,26 +49,35 @@
 
     <!-- 클릭 업그레이드 -->
     <button id="buyClickUpgrade">
-      별 생성기 업그레이드 (가격: <span id="clickUpgradeCost">20</span>)  
+      별 생성기 업그레이드 (가격: <span id="clickUpgradeCost">20</span>)
     </button>
     <p>클릭당 스타: <span id="clickPower">1</span></p>
 
-    <!-- 자동 수익 업그레이드 -->
+    <!-- 망원경 구매 -->
     <button id="buyCursor">
-      망원경 +1 (가격: <span id="cursorCost">10</span>)  
+      망원경 +1 (가격: <span id="cursorCost">10</span>)
     </button>
     <p>망원경 수: <span id="cursorCount">0</span></p>
+
+    <!-- 망원경 업그레이드 -->
+    <button id="buyCursorUpgrade">
+      망원경 업그레이드 (가격: <span id="cursorUpgradeCost">30</span>)
+    </button>
+    <p>망원경 생산량: <span id="cursorPower">0.2</span> / 개</p>
   </div>
 
   <script>
     let stars = 0;
-    let starPerClick = 1;
 
-    let clickUpgradeLevel = 1;
+    // 클릭 관련
+    let starPerClick = 1;
     let clickUpgradeCost = 20;
 
+    // 망원경 관련
     let telescopes = 0;
     let telescopeCost = 10;
+    let telescopePower = 0.2;
+    let telescopeUpgradeCost = 30;
 
     const starsDisplay = document.getElementById('stars');
     const starPerClickDisplay = document.getElementById('starPerClick');
@@ -78,6 +87,9 @@
     const cursorCountDisplay = document.getElementById('cursorCount');
     const cursorCostDisplay = document.getElementById('cursorCost');
 
+    const cursorPowerDisplay = document.getElementById('cursorPower');
+    const cursorUpgradeCostDisplay = document.getElementById('cursorUpgradeCost');
+
     document.getElementById('star-btn').addEventListener('click', () => {
       stars += starPerClick;
       updateDisplay();
@@ -86,7 +98,6 @@
     document.getElementById('buyClickUpgrade').addEventListener('click', () => {
       if (stars >= clickUpgradeCost) {
         stars -= clickUpgradeCost;
-        clickUpgradeLevel++;
         starPerClick++;
         clickUpgradeCost = Math.floor(clickUpgradeCost * 1.7);
         updateDisplay();
@@ -102,17 +113,31 @@
       }
     });
 
+    document.getElementById('buyCursorUpgrade').addEventListener('click', () => {
+      if (stars >= telescopeUpgradeCost) {
+        stars -= telescopeUpgradeCost;
+        telescopePower = parseFloat((telescopePower + 0.2).toFixed(2));
+        telescopeUpgradeCost = Math.floor(telescopeUpgradeCost * 2);
+        updateDisplay();
+      }
+    });
+
     function updateDisplay() {
       starsDisplay.textContent = Math.floor(stars);
       starPerClickDisplay.textContent = starPerClick;
       clickPowerDisplay.textContent = starPerClick;
       clickUpgradeCostDisplay.textContent = clickUpgradeCost;
+
       cursorCountDisplay.textContent = telescopes;
       cursorCostDisplay.textContent = telescopeCost;
+
+      cursorPowerDisplay.textContent = telescopePower.toFixed(2);
+      cursorUpgradeCostDisplay.textContent = telescopeUpgradeCost;
     }
 
+    // 자동 수익
     setInterval(() => {
-      stars += telescopes * 0.2;
+      stars += telescopes * telescopePower;
       updateDisplay();
     }, 100);
 
