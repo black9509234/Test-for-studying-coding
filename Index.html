@@ -42,32 +42,61 @@
   <h1>스타 팩토리</h1>
   <p>스타: <span id="stars">0</span></p>
 
-  <button id="star-btn">별 생성하기!</button>
+  <button id="star-btn">별 생성하기! (+<span id="starPerClick">1</span>)</button>
 
   <div id="shop">
     <h2>업그레이드</h2>
-    <button id="buyCursor">망원경 +1 (가격: <span id="cursorCost">10</span> 스타)</button>
+
+    <!-- 클릭 업그레이드 -->
+    <button id="buyClickUpgrade">
+      별 생성기 업그레이드 (가격: <span id="clickUpgradeCost">20</span>)  
+    </button>
+    <p>클릭당 스타: <span id="clickPower">1</span></p>
+
+    <!-- 자동 수익 업그레이드 -->
+    <button id="buyCursor">
+      망원경 +1 (가격: <span id="cursorCost">10</span>)  
+    </button>
     <p>망원경 수: <span id="cursorCount">0</span></p>
   </div>
 
   <script>
     let stars = 0;
+    let starPerClick = 1;
+
+    let clickUpgradeLevel = 1;
+    let clickUpgradeCost = 20;
+
     let telescopes = 0;
     let telescopeCost = 10;
 
     const starsDisplay = document.getElementById('stars');
+    const starPerClickDisplay = document.getElementById('starPerClick');
+    const clickPowerDisplay = document.getElementById('clickPower');
+    const clickUpgradeCostDisplay = document.getElementById('clickUpgradeCost');
+
     const cursorCountDisplay = document.getElementById('cursorCount');
     const cursorCostDisplay = document.getElementById('cursorCost');
 
     document.getElementById('star-btn').addEventListener('click', () => {
-      stars += 1;
+      stars += starPerClick;
       updateDisplay();
+    });
+
+    document.getElementById('buyClickUpgrade').addEventListener('click', () => {
+      if (stars >= clickUpgradeCost) {
+        stars -= clickUpgradeCost;
+        clickUpgradeLevel++;
+        starPerClick++;
+        clickUpgradeCost = Math.floor(clickUpgradeCost * 1.7);
+        updateDisplay();
+      }
     });
 
     document.getElementById('buyCursor').addEventListener('click', () => {
       if (stars >= telescopeCost) {
         stars -= telescopeCost;
-        telescopes += 1;
+        telescopes++;
         telescopeCost = Math.floor(telescopeCost * 1.5);
         updateDisplay();
       }
@@ -75,11 +104,13 @@
 
     function updateDisplay() {
       starsDisplay.textContent = Math.floor(stars);
+      starPerClickDisplay.textContent = starPerClick;
+      clickPowerDisplay.textContent = starPerClick;
+      clickUpgradeCostDisplay.textContent = clickUpgradeCost;
       cursorCountDisplay.textContent = telescopes;
       cursorCostDisplay.textContent = telescopeCost;
     }
 
-    // 자동 스타 수집
     setInterval(() => {
       stars += telescopes * 0.2;
       updateDisplay();
