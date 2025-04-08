@@ -94,6 +94,16 @@
   <button onclick="loadGame()">불러오기</button>
   <button onclick="resetGame()">초기화</button>
 </div>
+  
+  <button id="buySatellite">
+  위성 +1 (가격: <span id="satelliteCost">100</span>)
+</button>
+<p>위성 수: <span id="satelliteCount">0</span></p>
+
+<button id="buyPlanet">
+  행성 +1 (가격: <span id="planetCost">1000</span>)
+</button>
+<p>행성 수: <span id="planetCount">0</span></p>
 
   <script>
     let stars = 0;
@@ -108,6 +118,14 @@
     let telescopePower = 0.2;
     let telescopeUpgradeCost = 30;
 
+    let satellites = 0;
+let satelliteCost = 100;
+const satellitePower = 5;
+
+let planets = 0;
+let planetCost = 1000;
+const planetPower = 50;
+
     const starsDisplay = document.getElementById('stars');
     const starPerClickDisplay = document.getElementById('starPerClick');
     const clickPowerDisplay = document.getElementById('clickPower');
@@ -120,6 +138,13 @@
     const cursorUpgradeCostDisplay = document.getElementById('cursorUpgradeCost');
 
     const starsPerSecondDisplay = document.getElementById('starsPerSecond');
+
+    const satelliteCountDisplay = document.getElementById('satelliteCount');
+const satelliteCostDisplay = document.getElementById('satelliteCost');
+
+const planetCountDisplay = document.getElementById('planetCount');
+const planetCostDisplay = document.getElementById('planetCost');
+
 
     document.getElementById('star-btn').addEventListener('click', () => {
       stars += starPerClick;
@@ -229,6 +254,45 @@ function resetGame() {
 
     // 10초마다 자동 저장
 setInterval(saveGame, 10000);
+
+    document.getElementById('buySatellite').addEventListener('click', () => {
+  if (stars >= satelliteCost) {
+    stars -= satelliteCost;
+    satellites++;
+    satelliteCost = Math.floor(satelliteCost * 1.4);
+    updateDisplay();
+  }
+});
+
+document.getElementById('buyPlanet').addEventListener('click', () => {
+  if (stars >= planetCost) {
+    stars -= planetCost;
+    planets++;
+    planetCost = Math.floor(planetCost * 1.4);
+    updateDisplay();
+  }
+});
+
+    setInterval(() => {
+  stars += telescopes * telescopePower;
+  stars += satellites * satellitePower / 10;
+  stars += planets * planetPower / 10;
+  updateDisplay();
+}, 100);
+
+    satelliteCountDisplay.textContent = satellites;
+satelliteCostDisplay.textContent = satelliteCost;
+
+planetCountDisplay.textContent = planets;
+planetCostDisplay.textContent = planetCost;
+
+const sps = (
+  telescopes * telescopePower * 10 +
+  satellites * satellitePower +
+  planets * planetPower
+).toFixed(1);
+starsPerSecondDisplay.textContent = sps;
+
 
   </script>
 </body>
