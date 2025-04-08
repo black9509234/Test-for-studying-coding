@@ -2,9 +2,8 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>럭키 룰렛 보상 게임</title>
+  <title>베팅 룰렛 게임</title>
   <style>
-    /* --- 배경 이펙트 --- */
     body {
       margin: 0;
       padding: 0;
@@ -34,7 +33,6 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      background: transparent;
       background-image: radial-gradient(white 1px, transparent 1px);
       background-size: 20px 20px;
       opacity: 0.15;
@@ -47,7 +45,6 @@
       100% { background-position: 20px 20px; }
     }
 
-    /* --- 룰렛 게임 본체 --- */
     .container {
       position: relative;
       z-index: 1;
@@ -122,7 +119,7 @@
     }
 
     button {
-      margin-top: 40px;
+      margin-top: 20px;
       padding: 15px 40px;
       font-size: 1.2em;
       background: linear-gradient(to right, #f39c12, #e67e22);
@@ -138,11 +135,21 @@
       background: linear-gradient(to right, #f1c40f, #f39c12);
     }
 
-    #result {
+    #result, #balance {
       margin-top: 20px;
-      font-size: 1.5em;
+      font-size: 1.4em;
       color: #f1c40f;
       text-shadow: 1px 1px 5px black;
+    }
+
+    #bet-input {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 1em;
+      width: 150px;
+      text-align: center;
+      border-radius: 5px;
+      border: none;
     }
   </style>
 </head>
@@ -151,11 +158,16 @@
   <div class="stars"></div>
 
   <div class="container">
-    <h1>럭키 룰렛 보상 게임</h1>
+    <h1>베팅 룰렛 게임</h1>
+
+    <div id="balance">보유 코인: 1000</div>
+    <input type="number" id="bet-input" placeholder="베팅 금액 입력" min="1" />
+
     <div class="wheel-wrapper">
       <div class="pointer"></div>
       <div id="wheel"></div>
     </div>
+
     <button id="spin">돌리기</button>
     <div id="result"></div>
   </div>
@@ -164,26 +176,29 @@
     const wheel = document.getElementById('wheel');
     const result = document.getElementById('result');
     const spinBtn = document.getElementById('spin');
+    const betInput = document.getElementById('bet-input');
+    const balanceDisplay = document.getElementById('balance');
 
+    let balance = 1000;
     const prizes = [
-      '500코인',
-      '꽝!',
-      '보너스 게임',
-      '1000코인',
-      '다시 돌리기',
-      '행운의 아이템',
-      '200코인',
-      '2배 보상'
+      { label: '500코인', amount: 500 },
+      { label: '꽝!', amount: 0 },
+      { label: '보너스 게임', amount: 200 },
+      { label: '1000코인', amount: 1000 },
+      { label: '다시 돌리기', amount: 0, retry: true },
+      { label: '행운의 아이템', amount: 300 },
+      { label: '200코인', amount: 200 },
+      { label: '2배 보상', multiplier: 2 }
     ];
 
     const anglePerSlot = 360 / prizes.length;
 
-    // 텍스트 레이블 직접 추가
-    prizes.forEach((text, i) => {
+    // 보상 텍스트 넣기
+    prizes.forEach((item, i) => {
       const label = document.createElement('div');
       label.className = 'segment-label';
       label.style.transform = `rotate(${i * anglePerSlot}deg) translate(0, -170px)`;
-      label.innerText = text;
+      label.innerText = item.label;
       wheel.appendChild(label);
     });
 
@@ -191,7 +206,20 @@
 
     spinBtn.addEventListener('click', () => {
       if (spinning) return;
+
+      const bet = parseInt(betInput.value);
+      if (!bet || bet <= 0) {
+        alert("베팅 금액을 입력하세요!");
+        return;
+      }
+      if (bet > balance) {
+        alert("보유 코인보다 많이 베팅할 수 없습니다!");
+        return;
+      }
+
       spinning = true;
+      balance -= bet;
+      updateBalance();
 
       const rotation = 360 * 5 + Math.floor(Math.random() * 360);
       wheel.style.transform = `rotate(${rotation}deg)`;
@@ -199,10 +227,32 @@
       setTimeout(() => {
         const normalized = rotation % 360;
         const index = Math.floor(((360 - normalized) % 360) / anglePerSlot);
-        result.textContent = `당신의 보상: ${prizes[index]}`;
+        const prize = prizes[index];
+
+        let win = 0;
+        if (prize.multiplier) {
+          win = bet * prize.multiplier;
+        } else if (prize.retry) {
+          win = 0;
+          spinning = false;
+          result.textContent = `다시 돌리기! 베팅금은 유지됩니다.`;
+          balance += bet; // 다시 돌리기니까 환불
+          updateBalance();
+          return;
+        } else {
+          win = prize.amount;
+        }
+
+        balance += win;
+        result.textContent = `보상: ${prize.label} (${win} 코인 획득!)`;
+        updateBalance();
         spinning = false;
       }, 4000);
     });
+
+    function updateBalance() {
+      balanceDisplay.textContent = `보유 코인: ${balance}`;
+    }
   </script>
 </body>
 </html>
