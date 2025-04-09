@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>test</title>
   <style>
-     body {
+    body {
       margin: 0;
       height: 100vh;
       display: flex;
-      justify-content: center; /* 가로 중앙 */
-      align-items: center;     /* 세로 중앙 */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       background-color: #f0f0f0;
     }
 
@@ -26,24 +27,24 @@
       border-radius: 10px;
       cursor: pointer;
     }
-      .counter {
-        margin-top: 20px;
-        font-size: 20px;
-    }
 
+    .counter {
+      margin-top: 20px;
+      font-size: 20px;
+    }
   </style>
 </head>
 <body>
-  <div class="box" onclick="increaseCounter ()">버튼</div>
+  <div class="box" onclick="increaseCounter()">버튼</div>
   <div class="counter">숫자: <span id="counter">0</span></div>
 
-    <script>
-      let counter = 0;
+  <script>
+    let counter = 0;
 
-      function increaseCounter () {
-       counter++;
-        document.GetElementById('count').textContent = count;
-      }
-    </script>
+    function increaseCounter() {
+      counter++;
+      document.getElementById('counter').textContent = counter;
+    }
+  </script>
 </body>
 </html>
