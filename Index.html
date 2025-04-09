@@ -25,7 +25,7 @@
       font-size: 20px;
       border-radius: 10px;
       cursor: pointer;
-
+    }
       .counter {
         margin-top: 20px;
         font-size: 20px;
@@ -34,14 +34,14 @@
   </style>
 </head>
 <body>
-  <div class="box" onclick="increaseCounter ()">버튼</vid>
+  <div class="box" onclick="increaseCounter ()">버튼</div>
   <div class="counter">숫자: <span id="counter">0</span></div>
 
     <script>
       let counter = 0;
 
       function increaseCounter () {
-       count++;
+       counter++;
         document.GetElementById('count').textContent = count;
       }
     </script>
