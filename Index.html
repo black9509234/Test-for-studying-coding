@@ -1,22 +1,66 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8"/>
-    <title>테스트</title>
-    <style>
-      .box {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 50px;
-        height: 50px;
-        border: 3px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+<head>
+  <meta charset="UTF-8">
+  <title>튕기는 박스</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #111;
+    }
+
+    .box {
+      position: absolute;
+      width: 150px;
+      height: 80px;
+      background-color: red;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 3px solid black;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">박건우 바보</div>
+
+  <script>
+    const box = document.querySelector('.box');
+
+    let x = 100;
+    let y = 100;
+    let dx = 2; // x 방향 속도
+    let dy = 2; // y 방향 속도
+
+    function animate() {
+      const boxWidth = box.offsetWidth;
+      const boxHeight = box.offsetHeight;
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+
+      x += dx;
+      y += dy;
+
+      // 벽에 닿으면 방향 반전
+      if (x + boxWidth >= windowWidth || x <= 0) {
+        dx *= -1;
       }
-    </style>
-  </head>
-  <body>
-    <div class="box">박건우 바보</div>
-  </body>
+      if (y + boxHeight >= windowHeight || y <= 0) {
+        dy *= -1;
+      }
+
+      box.style.left = x + 'px';
+      box.style.top = y + 'px';
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
