@@ -1,86 +1,33 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>증분 게임</title>
+  <title>test</title>
   <style>
-    body {
-      font-family: 'Arial', sans-serif;
+     body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center; /* 가로 중앙 */
+      align-items: center;     /* 세로 중앙 */
       background-color: #f0f0f0;
-      text-align: center;
-      padding: 50px;
     }
 
-    .container {
-      background-color: white;
-      padding: 30px;
+    .box {
+      width: 300px;
+      height: 200px;
+      background-color: #4caf50;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
       border-radius: 10px;
-      display: inline-block;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    button {
-      padding: 10px 20px;
-      margin: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .upgrade {
-      margin-top: 30px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>증분 게임</h1>
-    <p>점수: <span id="score">0</span></p>
-    <button id="clickBtn">클릭해서 점수 얻기</button>
-
-    <div class="upgrade">
-      <h2>업그레이드</h2>
-      <button id="autoClickerBtn">자동 클릭 (가격: <span id="upgradeCost">50</span>)</button>
-      <p>자동 클릭 수: <span id="autoClickers">0</span></p>
-    </div>
-  </div>
-
-  <script>
-    let score = 0;
-    let autoClickers = 0;
-    let upgradeCost = 50;
-
-    const scoreEl = document.getElementById('score');
-    const clickBtn = document.getElementById('clickBtn');
-    const autoClickerBtn = document.getElementById('autoClickerBtn');
-    const autoClickersEl = document.getElementById('autoClickers');
-    const upgradeCostEl = document.getElementById('upgradeCost');
-
-    clickBtn.addEventListener('click', () => {
-      score++;
-      updateUI();
-    });
-
-    autoClickerBtn.addEventListener('click', () => {
-      if (score >= upgradeCost) {
-        score -= upgradeCost;
-        autoClickers++;
-        upgradeCost = Math.floor(upgradeCost * 1.5);
-        updateUI();
-      }
-    });
-
-    function updateUI() {
-      scoreEl.textContent = score;
-      autoClickersEl.textContent = autoClickers;
-      upgradeCostEl.textContent = upgradeCost;
-    }
-
-    setInterval(() => {
-      score += autoClickers;
-      updateUI();
-    }, 1000);
-  </script>
+  <vid class="box">안녕하세요</vid>
 </body>
 </html>
-
