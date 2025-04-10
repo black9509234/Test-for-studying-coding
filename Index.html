@@ -1,73 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>물 흐름 시뮬레이션</title>
-  <style>
-    body { margin: 0; overflow: hidden; background: #111; }
-    canvas { display: block; }
-  </style>
-</head>
-<body>
-  <canvas id="waterCanvas"></canvas>
-  <script>
-    const canvas = document.getElementById('waterCanvas');
-    const ctx = canvas.getContext('2d');
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const drops = [];
-
-    class WaterDrop {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.radius = 3 + Math.random() * 2;
-        this.vy = 1 + Math.random() * 2; // 속도
-        this.vx = (Math.random() - 0.5) * 1; // 옆으로 살짝 퍼짐
-      }
-
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.vy += 0.05; // 중력 효과
-
-        // 화면 아래로 나가면 제거
-        if (this.y > canvas.height) {
-          const index = drops.indexOf(this);
-          if (index > -1) drops.splice(index, 1);
-        }
-      }
-
-      draw() {
-        ctx.beginPath();
-        ctx.fillStyle = 'rgba(0, 150, 255, 0.7)';
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    function spawnDrop() {
-      const x = Math.random() * canvas.width;
-      const y = -10;
-      drops.push(new WaterDrop(x, y));
-    }
-
-    function animate() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      drops.forEach(drop => {
-        drop.update();
-        drop.draw();
-      });
-
-      requestAnimationFrame(animate);
-    }
-
-    setInterval(spawnDrop, 50);
-    animate();
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8"/>
+    <title>test</title>
+    <style>
+      body {
+        test-align:center;
+    </style>
+  <h1>안녕하세요</h1>
+  </head>
 </html>
