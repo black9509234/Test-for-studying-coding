@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8"/>
-    <title>test</title>
-    <style>
-      body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+<head>
+  <meta charset="UTF-8"/>
+  <title>2x2 버튼</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+    }
 
-      button {
-        padding: 10px 20px;
-        font-size: 16px
-      }
-    </style>
-  </head>
-  <body>
-    <button>중앙 버튼</button>
-  </body>
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(2, auto); /* 2열 */
+      grid-gap: 20px; /* 버튼 사이 간격 */
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="button-grid">
+    <button>버튼 1</button>
+    <button>버튼 2</button>
+    <button>버튼 3</button>
+    <button>버튼 4</button>
+  </div>
+</body>
 </html>
