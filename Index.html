@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>숫자 키우기 게임</title>
+    <title>숫자 키우기</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -15,7 +15,7 @@
             background-color: white;
             padding: 30px;
             border-radius: 10px;
-            width: 300px;
+            width: 350px;
             margin: 0 auto;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -28,7 +28,14 @@
         button {
             padding: 10px 20px;
             font-size: 16px;
+            margin: 5px;
             cursor: pointer;
+        }
+
+        .factory-info {
+            font-size: 14px;
+            margin-top: 10px;
+            color: #555;
         }
     </style>
 </head>
@@ -37,66 +44,51 @@
         <h1>숫자 키우기</h1>
         <p id="number">0</p>
         <button onclick="increase()">클릭해서 키우기</button>
+        <br>
+        <button onclick="buyFactory()">공장 n1 구매</button>
+        <div class="factory-info">
+            공장 수: <span id="factoryCount">0</span><br>
+            다음 공장 가격: <span id="factoryCost">0</span>원
+        </div>
     </div>
 
     <script>
         let number = 0;
+        let factoryCount = 0;
+        let factoryCost = 0;
 
+        // 클릭 시 숫자 증가
         function increase() {
             number++;
+            updateUI();
+        }
+
+        // 공장 구매
+        function buyFactory() {
+            if (number >= factoryCost) {
+                number -= factoryCost;
+                factoryCount++;
+                // 다음 가격은 2^factoryCount (첫 번째는 0원이므로 2^(count-1))
+                factoryCost = Math.pow(2, factoryCount);
+                updateUI();
+            }
+        }
+
+        // 자동 증가 - 1초마다 factoryCount 만큼 숫자 증가
+        setInterval(() => {
+            number += factoryCount;
+            updateUI();
+        }, 1000);
+
+        // UI 업데이트
+        function updateUI() {
             document.getElementById("number").innerText = number;
-        }
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>숫자 키우기 게임</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f3f3f3;
-            text-align: center;
-            margin-top: 100px;
+            document.getElementById("factoryCount").innerText = factoryCount;
+            document.getElementById("factoryCost").innerText = factoryCost;
         }
 
-        .game-container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            width: 300px;
-            margin: 0 auto;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        #number {
-            font-size: 48px;
-            margin: 20px 0;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <div class="game-container">
-        <h1>숫자 키우기</h1>
-        <p id="number">0</p>
-        <button onclick="increase()">클릭해서 키우기</button>
-    </div>
-
-    <script>
-        let number = 0;
-
-        function increase() {
-            number++;
-            document.getElementById("number").innerText = number;
-        }
+        // 초기 렌더링
+        updateUI();
     </script>
 </body>
 </html>
