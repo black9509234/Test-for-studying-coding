@@ -55,7 +55,7 @@
                 number -= factoryCost;
                 factoryCount++;
                 // 다음 가격은 2^factoryCount (첫 번째는 0원이므로 2^(count-1))
-                factoryCost = Math.pow(2, factoryCount);
+                factoryCost = Math.pow(1.5, factoryCount);
                 updateUI();
             }
         }
