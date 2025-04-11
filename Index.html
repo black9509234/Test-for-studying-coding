@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>숫자 키우기</title>
+    <title>test</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -52,7 +52,6 @@
             if (number >= factoryCost) {
                 number -= factoryCost;
                 factoryCount++;
-                // 다음 가격은 2^factoryCount (첫 번째는 0원이므로 2^(count-1))
                 factoryCost = Math.pow(1.5, factoryCount);
                 updateUI();
             }
@@ -63,15 +62,13 @@
             updateUI();
         }, 50);
 
-        // UI 업데이트
         function updateUI() {
             document.getElementById("number").innerText = number.toFixed(2);
             document.getElementById("factoryCount").innerText = factoryCount;
             document.getElementById("factoryCost").innerText = factoryCost.toFixed(2);
             
         }
-
-        // 초기 렌더링
+        
         updateUI();
     </script>
 </body>
