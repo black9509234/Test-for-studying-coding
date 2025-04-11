@@ -48,7 +48,6 @@
         let number = 0;
         let factoryCount = 0;
         let factoryCost = 0;
-        let noDecimal = Math.trunc(number)
 
         // 공장 구매
         function buyFactory() {
@@ -69,9 +68,10 @@
 
         // UI 업데이트
         function updateUI() {
-            document.getElementById("number").innerText = number;
+            document.getElementById("number").innerText = Math.toFixed(number);
             document.getElementById("factoryCount").innerText = factoryCount;
-            document.getElementById("factoryCost").innerText = factoryCost;
+            document.getElementById("factoryCost").innerText = Math.toFixed(factoryCost);
+            
         }
 
         // 초기 렌더링
