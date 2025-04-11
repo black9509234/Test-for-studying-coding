@@ -25,13 +25,6 @@
             margin: 20px 0;
         }
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin: 5px;
-            cursor: pointer;
-        }
-
         .factory-info {
             font-size: 14px;
             margin-top: 10px;
@@ -43,7 +36,6 @@
     <div class="game-container">
         <h1>숫자 키우기</h1>
         <p id="number">0</p>
-        <button onclick="increase()">클릭해서 키우기</button>
         <br>
         <button onclick="buyFactory()">공장 n1 구매</button>
         <div class="factory-info">
@@ -56,12 +48,6 @@
         let number = 0;
         let factoryCount = 0;
         let factoryCost = 0;
-
-        // 클릭 시 숫자 증가
-        function increase() {
-            number++;
-            updateUI();
-        }
 
         // 공장 구매
         function buyFactory() {
