@@ -1,54 +1,24 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>WASD로 상자 움직이기</title>
-  <style>
-    #box {
-      width: 50px;
-      height: 50px;
-      background-color: royalblue;
-      position: absolute;
-      top: 100px;
-      left: 100px;
-      transition: 0.05s;
-    }
-    body {
-      height: 100vh;
-      margin: 0;
-      overflow: hidden;
-    }
-  </style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8"/>
+    <title>test</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+      }
 
-<div id="box"></div>
-
-<script>
-  const box = document.getElementById('box');
-  let topPosition = 100;
-  let leftPosition = 100;
-  const step = 10;
-
-  document.addEventListener('keydown', (event) => {
-    switch (event.key.toLowerCase()) {
-      case 'w':
-        topPosition -= step;
-        break;
-      case 's':
-        topPosition += step;
-        break;
-      case 'a':
-        leftPosition -= step;
-        break;
-      case 'd':
-        leftPosition += step;
-        break;
-    }
-    box.style.top = topPosition + 'px';
-    box.style.left = leftPosition + 'px';
-  });
-</script>
-
-</body>
+      .box {
+        width: 50px;
+        height: 50px;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
 </html>
