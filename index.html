@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <title>증분게임</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #count {
+            font-size: larger;
+            margin: 20px;
+        }
+
+        button {
+            padding: 10px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="count">0</div>
+    <button onclick="increase()">클릭해서 올리기</button>
+    <button onclick="buyUpgrade()">업그레이드 (가격 : <span id="cost">10</span>)</button>
+
+    <script>
+        let count = 0;
+        let increaseAmount = 1;
+        let upgradeCost = 10;
+
+        function updateUI() {
+            document.getElementById('count').textContent = Math.floor(count);
+            document.getElementById('cost').textContent = upgradeCost;
+        }
+
+        function increase() {
+            count += increaseAmount;
+            updateUI();
+        }
+
+        function buyUpgrade() {
+            if (count >= upgradeCost) {
+                count -= upgradeCost;
+                increaseAmount *= 2;
+                upgradeCost = Math.floor(upgradeCost * 2.5);
+                updateUI();
+            } else {
+                alert('포인트가 부족합니다!');
+            }
+        }
+
+        updateUI();
+    </script>
+</body>
+</html>
