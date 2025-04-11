@@ -59,11 +59,10 @@
             }
         }
 
-        // 자동 증가 - 1초마다 factoryCount 만큼 숫자 증가
         setInterval(() => {
-            number += factoryCount;
+            number += factoryCount / 10;
             updateUI();
-        }, 1000);
+        }, 100);
 
         // UI 업데이트
         function updateUI() {
