@@ -1,43 +1,20 @@
 <!DOCTYPE html>
-<html lang="ko">
+<hmtl lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <title>터치로 글자 키우기</title>
-  <style>
-    body {
-      background-color: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .text {
-      font-size: 30px;
-      color: white;
-      text-shadow:
-        0 0 5px aqua,
-        0 0 10px aqua,
-        0 0 20px aqua,
-        0 0 40px aqua,
-        0 0 80px aqua;
-      cursor: pointer;
-      user-select: none;
-    }
-  </style>
+    <meta charset="UTF-8"/>
+    <title>test</title>
+    <style>
+        body {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-  <div class="text" id="neonText">안녕하세요</div>
-
-  <script>
-    const text = document.getElementById("neonText");
-
-    text.addEventListener("click", () => {
-      const currentSize = parseFloat(window.getComputedStyle(text).fontSize);
-      text.style.fontSize = (currentSize + 5) + "px";
-    });
-  </script>
+    <h1>자습</h1>
 </body>
-</html>
+</hmtl>
