@@ -1,25 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8"/>
-        <title>test</title>
-        <style>
-            body {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .box {
-                height: 100px;
-                width: 100px;
-                border: 5px solid black;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="box"></div>
-    </body>
+<head>
+  <meta charset="UTF-8">
+  <title>스네이크 게임</title>
+  <style>
+    canvas {
+      background: #000;
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="game" width="400" height="400"></canvas>
+  <script src="snake.js"></script>
+</body>
 </html>
