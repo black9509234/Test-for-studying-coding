@@ -5,45 +5,34 @@
     <title>test</title>
     <style>
       body {
-    background-color: #f0f0f0;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-}
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
 
-.box {
-    height: 50px;
-    width: 100px;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 5px;
-}
+      #box {
+        height: 50px;
+        width: 20;
+        text-align: center;
+        border: 2px solid black;
+      }
 
-#count {
-    font-size: large;
-    margin: 20px;
-}
+      #count {
+        font-size: larger;
+      }
+
     </style>
   </head>
   <body>
-    <button onclick="increase()" class="box">눌러보세요</button>
     <p><span id="count"></span></p>
-    
+    <button id="box">n1 구매</button>
+
     <script>
       let count = 0;
-      document.getElementById('count').innerText = count;
-
-function increase () {
-    count ++;
-    document.getElementById('count').innerText = count;
-}
+      let 
     </script>
   </body>
 </html>
