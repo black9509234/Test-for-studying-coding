@@ -3,12 +3,43 @@
   <head>
     <meta charset="UTF-8"/>
     <title>test</title>
-    <link rel="stylesheet" href="style.scc">
+    <style>
+      body {
+    background-color: black;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    height: 20px;
+    width: 50px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+}
+
+#count {
+    font-size: large;
+}
+    </style>
   </head>
   <body>
     <button onclick="increase()" class="box">눌러보세요</button>
     <p><span id="count"></span></p>
     
-    <script src="script.js"></script>
+    <script>
+      let count = 0;
+
+function increase () {
+    count ++;
+    document.getElementById('box').innerText = count;
+}
+    </script>
   </body>
 </html>
