@@ -1,39 +1,67 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8"/>
-    <title>test</title>
-    <style>
-      body {
-        height: 100vh;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+<head>
+  <meta charset="UTF-8">
+  <title>방치형 디멘션 게임</title>
+</head>
+<body>
+  <h1>자원: <span id="resource">0</span></h1>
+
+  <div>
+    <h2>1차 디멘션 (D1)</h2>
+    <p>수량: <span id="d1-count">0</span></p>
+    <button onclick="buyD1()">구매 (비용: <span id="d1-cost">10</span>)</button>
+  </div>
+
+  <div>
+    <h2>2차 디멘션 (D2)</h2>
+    <p>수량: <span id="d2-count">0</span></p>
+    <button onclick="buyD2()">구매 (비용: <span id="d2-cost">100</span>)</button>
+  </div>
+
+  <script>
+    let resource = 0;
+
+    let d1 = { count: 0, cost: 10 };
+    let d2 = { count: 0, cost: 100 };
+
+    function updateDisplay() {
+      document.getElementById('resource').textContent = Math.floor(resource);
+      document.getElementById('d1-count').textContent = d1.count;
+      document.getElementById('d1-cost').textContent = d1.cost;
+      document.getElementById('d2-count').textContent = d2.count;
+      document.getElementById('d2-cost').textContent = d2.cost;
+    }
+
+    function buyD1() {
+      if (resource >= d1.cost) {
+        resource -= d1.cost;
+        d1.count += 1;
+        d1.cost = Math.floor(d1.cost * 1.5);
+        updateDisplay();
       }
+    }
 
-      #button {
-        color: black;
-        height: 50px;
-        width: 20;
-        text-align: center;
-        border: 2px solid none;
+    function buyD2() {
+      if (resource >= d2.cost) {
+        resource -= d2.cost;
+        d2.count += 1;
+        d2.cost = Math.floor(d2.cost * 2);
+        updateDisplay();
       }
+    }
 
-      #count {
-        font-size: larger;
-      }
+    // 1초마다 1차 디멘션이 자원 생성
+    setInterval(() => {
+      resource += d1.count;
+      updateDisplay();
+    }, 1000);
 
-    </style>
-  </head>
-  <body>
-    <p><span id="count"></span></p>
-    <button id="button"></button>
-
-    <script>
-      let count = 0;
-      let 
-    </script>
-  </body>
+    // 1초마다 2차 디멘션이 1차 디멘션 생성
+    setInterval(() => {
+      d1.count += d2.count;
+      updateDisplay();
+    }, 1000);
+  </script>
+</body>
 </html>
