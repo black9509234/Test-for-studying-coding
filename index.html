@@ -20,9 +20,9 @@
   </div>
 
   <script>
-    let resource = 0;
+    let resource = 1; // 시작 자원 1
 
-    let d1 = { count: 0, cost: 0 };
+    let d1 = { count: 0, cost: 10 };
     let d2 = { count: 0, cost: 100 };
 
     function updateDisplay() {
@@ -62,6 +62,9 @@
       d1.count += d2.count;
       updateDisplay();
     }, 1000);
+
+    // 최초 UI 반영
+    updateDisplay();
   </script>
 </body>
 </html>
