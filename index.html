@@ -2,29 +2,40 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8"/>
+    <title>game1</title>
     <style>
       body {
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         text-align: center;
-        margin-top: 100px;
       }
 
       #number {
         color: black;
       }
+
+      #n1 {
+        width: 30px;
+        height: 10px;
+        text-align: center;
+        padding: auto;
+        x: 100px;
+      }
     </style>
   </head>
   <body>
-    <p><span id="number"></span></p>
+    <h2><span id="n1"></span></h2>
+    <button id="n1" onclick="Increase_n1()">n1 구매<button>
 
     <script>
-      let number = 0;
-      const el = document.getElementById('number');
-      el.innerText = number;
+      let n1 = 0;
 
-      setInterval(function() {
-        number ++;
-        el.innerText = number;
-        }, 100);
+      function Increase_n1() {
+        n1 ++;
+      }
     </script>
   </body>
 </html>
