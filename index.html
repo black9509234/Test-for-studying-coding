@@ -13,7 +13,8 @@
 
     <script>
       let number = 0;
-      document.getElementById('number').innerText = number;
+      const el = document.getElementById('number');
+      el.innerText = number;
 
       setInterval(function() {
         number ++;
