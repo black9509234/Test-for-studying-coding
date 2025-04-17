@@ -39,15 +39,23 @@
 <body>
   <div class="center-box">
     <h2><span id="number">0</span></h2>
-    <button onclick="IncreaseN1()" id="n1">n1 구매</button>
+    <button onclick="num_n1++" id="n1">n1 구매</button>
   </div>
 
   <script>
-    let number = 0;
-    function IncreaseN1(){
+    let number = 1;
+    let num_n1 = 0
+    let production_n1 = 1;
+    let cost_n1 = 1;
+
+    function IncreaseN1 (){
       number++;
       document.getElementById('number').innerText = number;
     }
+
+    setInterval(function() {
+  number += num_n1 * production_n1 * 10;
+}, 100);
   </script>
 </body>
 </html>
