@@ -11,6 +11,7 @@
         justify-content: center;
         align-items: center;
         text-align: center;
+        flex-direction: column;
       }
 
       #number {
@@ -18,31 +19,29 @@
       }
 
       #n1 {
-        width: 30px;
-        height: 10px;
+        width: 80px;
+        height: 30px;
         text-align: center;
-        padding: auto;
-        x: 100px;
       }
     </style>
   </head>
   <body>
-    <h2><span id="number"></span></h2>
-    <button id="n1" onclick="Increase_n1()">n1 구매<button>
+    <h2><span id="number">0</span></h2>
+    <button id="n1" onclick="Increase_n1()">n1 구매</button>
 
     <script>
+      let number = 0;
       let n1 = 0;
-      let n1_producing = 0
+      let n1_producing = 1;
 
       function Increase_n1() {
-        n1 ++;
+        n1++;
       }
 
       setInterval(function() {
         number += n1_producing * n1;
+        document.getElementById('number').innerText = number;
       }, 1000);
-
-      document.getElementById('number').innerText = number;
     </script>
   </body>
 </html>
