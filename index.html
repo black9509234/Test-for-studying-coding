@@ -32,10 +32,17 @@
 
     <script>
       let n1 = 0;
+      let n1_producing = 0
 
       function Increase_n1() {
         n1 ++;
       }
+
+      setInterval(function() {
+        number += n1_producing * n1;
+      }, 1000);
+
+      document.getElementById('number').innerText = number;
     </script>
   </body>
 </html>
