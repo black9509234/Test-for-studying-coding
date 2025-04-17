@@ -1,61 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8"/>
-  <title>idle.game</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background-color: lightgray;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      text-align: center;
-      padding-top: 60px;
-    }
+  <head>
+    <meta charset="UTF-8"/>
+  </head>
+  <body>
+    <p><span id="number"></span></p>
 
-    .center-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    <script>
+      let number = 0;
 
-    #n1 {
-      width: 100px;
-      height: 50px;
-      border: 1.5px solid black;
-      text-align: center;
-      color: black;
-      cursor: pointer;
-    }
-
-    #number {
-      font-size: 32px;
-      margin: 20px;
-    }
-  </style>
-</head>
-<body>
-  <div class="center-box">
-    <h2><span id="number">0</span></h2>
-    <button onclick="num_n1++" id="n1">n1 구매</button>
-  </div>
-
-  <script>
-    let number = 1;
-    let num_n1 = 0
-    let production_n1 = 1;
-    let cost_n1 = 1;
-
-    function IncreaseN1 (){
-      number++;
-      document.getElementById('number').innerText = number;
-    }
-
-    setInterval(function() {
-  number += num_n1 * production_n1 * 10;
-}, 100);
-  </script>
-</body>
+      setInterval(function() {
+        number ++;
+        }, 100);
+    </script>
+  </body>
 </html>
