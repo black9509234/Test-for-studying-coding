@@ -2,6 +2,11 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8"/>
+    <style>
+      #number {
+        color: black;
+      }
+    </style>
   </head>
   <body>
     <p><span id="number"></span></p>
@@ -9,7 +14,7 @@
     <script>
       let number = 0;
       document.getElementById('number').innerText = number;
-      
+
       setInterval(function() {
         number ++;
         }, 100);
