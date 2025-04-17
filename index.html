@@ -30,6 +30,16 @@
   </style>
   </head>
   <body>
-    <button id="n1">n1 구매</button>
+    <p><span id="number">0</span></p>
+    <button onclick="IncreaseN1()" id="n1">n1 구매</button>
+
+    <script>
+      let number = 0;
+      document.getElementById('number').innerText = 0;
+
+      function IncreaseN1(){
+        number++;
+      }
+    </script>
   </body>
 </html>
