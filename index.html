@@ -2,46 +2,24 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8"/>
-    <title>game1</title>
+    <titel>test</titel>
     <style>
       body {
         height: 100vh;
         margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        flex-direction: column;
-      }
-
-      #number {
-        color: black;
       }
 
       #n1 {
-        width: 80px;
-        height: 30px;
+        width: 50px;
+        height: 20px;
+        border: 1px solid black;
+        border-radius: 5px;
         text-align: center;
+        x: 50%;
+        y: 50%;
       }
     </style>
   </head>
   <body>
-    <h2><span id="number">0</span></h2>
-    <button id="n1" onclick="Increase_n1()">n1 구매</button>
-
-    <script>
-      let number = 0;
-      let n1 = 0;
-      let n1_producing = 1;
-
-      function Increase_n1() {
-        n1++;
-      }
-
-      setInterval(function() {
-        number += n1_producing * n1;
-        document.getElementById('number').innerText = number;
-      }, 1000);
-    </script>
-  </body>
+    <div id="n1">n1 구매 / 가격 : <span id="n1_cost"></span></div>
 </html>
