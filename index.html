@@ -13,10 +13,11 @@
 
     <script>
       let number = 0;
-      document.getElementById('number').innerText = number ;
+      document.getElementById('number').innerText = number;
 
       setInterval(function() {
         number ++;
+        number.innerText = number;
         }, 100);
     </script>
   </body>
