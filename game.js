@@ -42,11 +42,11 @@ function FunctionN2(){
 
 
 setInterval(function() {
-  number += n1 * n1_producing / 10;
+  number += n1 * n1_producing * 1000;
 
   if (number >= 100) {
     document.getElementById('number').innerText = Math.floor(number);
   } else {
     document.getElementById('number').innerText = number.toFixed(2);
   }
-}, 0.001);
+}, 1);
