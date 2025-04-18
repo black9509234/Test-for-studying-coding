@@ -34,10 +34,6 @@
         transform: translateX(-40px);
       }
 
-      #n1_explain {
-        color: #bdbdbd;
-        font-size: small;
-      }
     </style>
   </head>
   <body>
@@ -45,7 +41,8 @@
     <div><button onclick="IncreaseN1()" id="n1_button" style="color: black;">
       n1 구매 / 가격 : <span id="n1_cost"></span>
     </button>
-    <span id="n1_explain">현재 n1의 개당 생산량 : <span id="n1_producing"></span></span>
+    <span style="color: #bdbdbd; font-size: small;">현재 n1의 개당 생산량 : <span id="n1_producing"></span></span>
+    <span style="color: #bdbdbd; font-size: small;">현재 n1의 개수 : <span id="n1"></span></span>
     </div>
 
     <script>
@@ -53,6 +50,7 @@
       let n1 = 0;
       let n1_producing = 1
       let n1_cost = 1;
+      document.getElementById('n1').innerText = n1;
       document.getElementById('number').innerText = number;
       document.getElementById('n1_producing').innerText = n1_producing;
       document.getElementById('n1_cost').innerText = n1_cost;
