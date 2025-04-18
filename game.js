@@ -27,7 +27,7 @@ function IncreaseN1() {
 }
 
 
-function IncreaseN1(){
+function FunctionN2(){
   if (number >= n2_cost){
     number -= n2_cost;
     n2_producing *= 1.15;
