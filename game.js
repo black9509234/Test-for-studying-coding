@@ -2,12 +2,14 @@ let number = 1
 let n1 = 0;
 let n1_producing = 1
 let n1_cost = 1;
-let n2_cost = 1000;
+let n2_cost = 500;
 let n2_producing = 0;
 document.getElementById('number').innerText = number;
 document.getElementById('n1_producing').innerText = n1_producing;
 document.getElementById('n1_cost').innerText = n1_cost;
 document.getElementById('n1').innerText = n1;
+document.getElementById('n2_cost').innerText = n2_cost;
+document.getElementById('n2_producing').innerText = n2_producing;
 
 function IncreaseN1() {
   if (number >= n1_cost){
@@ -23,6 +25,18 @@ function IncreaseN1() {
     document.getElementById('n1_cost').innerText = n1_cost.toFixed(2);
   };
 }
+
+
+function IncreaseN1(){
+  if (number >= n2_cost){
+    number -= n2_cost;
+    n2_producing *= 1.15;
+    n1_producing *= 1.15
+  }
+
+  document.getElementById('n2_producing').innerText = n2_producing;
+}
+
 
 setInterval(function() {
   number += n1 * n1_producing / 10;
