@@ -28,3 +28,15 @@ body {
     text-align: center;
     transform: translateX(-50px);
   }
+
+  #number {
+    display: inline-block;
+    width: 80px; /* 숫자가 어느 정도 커지더라도 감당 가능하게 */
+    text-align: right; /* 오른쪽 정렬하면 자리 변경이 덜 눈에 띔 */
+  }
+  
+  #n1_cost, #n1_producing, #n1, #n2_cost, #n2_producing {
+    display: inline-block;
+    width: 50px; /* 적절한 크기 설정 */
+    text-align: right;
+  }
