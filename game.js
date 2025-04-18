@@ -59,8 +59,8 @@ function DecreaseN2() {
     n3_decrease *= 1.15;
   }
 
-  document.getElementById('n3_cost').innerText = n3_cost.toFixed;
-  document.getElementById('n3_decrease').innerText = n3_decrease.toFixed;
+  document.getElementById('n3_cost').innerText = n3_cost.toFixed(0);
+  document.getElementById('n3_decrease').innerText = n3_decrease.toFixed(0);
 }
 
 
