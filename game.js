@@ -4,12 +4,12 @@ let n1_producing = 1
 let n1_cost = 1;
 let n2_cost = 500;
 let n2_producing = 1;
-document.getElementById('number').innerText = formatNumber(number);
-document.getElementById('n1_cost').innerText = formatNumber(n1_cost);
-document.getElementById('n2_cost').innerText = formatNumber(n2_cost);
+document.getElementById('number').innerText = number;
+document.getElementById('n1_cost').innerText = n1_cost;
+document.getElementById('n2_cost').innerText = n2_cost;
 document.getElementById('n1').innerText = n1;
-document.getElementById('n1_producing').innerText = formatNumber(n1_producing);
-document.getElementById('n2_producing').innerText = formatNumber(n2_producing);
+document.getElementById('n1_producing').innerText = n1_producing;
+document.getElementById('n2_producing').innerText = n2_producing;
 
 function IncreaseN1() {
   if (number >= n1_cost){
