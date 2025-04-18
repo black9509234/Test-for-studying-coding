@@ -3,7 +3,38 @@
   <head>
     <meta charset="UTF-8"/>
     <title>game</title>
-    <link rel="stylesheet" href="styles.v2.css">
+    <style>
+      body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #number {
+    font-size: 50px;
+    color: black;
+  }
+
+  #number_box {
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    transform: translateY(-20px);
+  }
+  
+  #n1_button,
+  #n2_button {
+    width: 200px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    transform: translateX(-50px);
+  }
+    </style>
   </head>
   <body>
     <div id="number_box"><span id="number"></span></div>
@@ -22,6 +53,60 @@
       <span style="color: #bdbdbd; font-size: small;">n1의 생산량을 증가시킵니다.</span>
       <span style="color: #bdbdbd; font-size: small;">/ 현재 증가량 : <span id="n2_producing"></span>배</span>
     </div>
-    <script src="game.js"></script>
+    <script>
+      let number = 1
+let n1 = 0;
+let n1_producing = 1
+let n1_cost = 1;
+let n2_cost = 500;
+let n2_producing = 1;
+document.getElementById('number').innerText = number;
+document.getElementById('n1_producing').innerText = n1_producing;
+document.getElementById('n1_cost').innerText = n1_cost;
+document.getElementById('n1').innerText = n1;
+document.getElementById('n2_cost').innerText = n2_cost;
+document.getElementById('n2_producing').innerText = n2_producing;
+
+function IncreaseN1() {
+  if (number >= n1_cost){
+    number -= n1_cost;
+    n1++;
+    n1_cost *= 1.25;
+  }
+
+  document.getElementById('n1').innerText = n1;
+  if (n1_cost >= 100) {
+    document.getElementById('n1_cost').innerText = Math.floor(n1_cost);
+  } else {
+    document.getElementById('n1_cost').innerText = n1_cost.toFixed(2);
+  };
+}
+
+
+function FunctionN2(){
+  if (number >= n2_cost){
+    number -= n2_cost;
+    n2_producing *= 1.15;
+    n1_producing *= 1.15;
+    n2_cost *= 1.25;
+  }
+
+  document.getElementById('n2_producing').innerText = n2_producing;
+  document.getElementById('n2_cost').innerText = n2_cost;
+  document.getElementById('n1_producing').innerText = n1_producing;
+}
+
+
+setInterval(function() {
+  number += n1 * n1_producing / 10;
+
+  if (number >= 100) {
+    document.getElementById('number').innerText = Math.floor(number);
+  } else {
+    document.getElementById('number').innerText = number.toFixed(2);
+  }
+}, 100);
+
+    </script>
   </body>
 </html>
