@@ -31,21 +31,36 @@
         border: 1px solid black;
         border-radius: 5px;
         text-align: center;
-        transform: translateX(0px);
+        transform: translateX(-50px);
+      }
+
+      #n1_explain {
+        color: #bdbdbd;
+        font-size: small;
       }
     </style>
   </head>
   <body>
     <div id="number_box"><span id="number"></span></div>
-    <button ondblclick="IncreaseN1()" id="n1_button">n1 구매 / 가격 : <span id="n1_cost"></span></button>
+    <div><button ondblclick="IncreaseN1()" id="n1_button" style="color: black;">
+      n1 구매 / 가격 : <span id="n1_cost"></span>
+    </button>
+    <span id="n1_explain">현재 개당 생산량 : <span id="n1_producing"></span></span>
+    </div>
 
     <script>
       let number = 1
       let n1 = 0;
+      let n1_producing = 1
+      let n1_cost;
 
       function IncreaseN1() {
         n1++;
       }
+
+      setInterval(function() {
+        number += n1 * n1_producing
+      }, 1000)
 
       document.getElementById('number').innerText = number;
     </script>
