@@ -49,4 +49,4 @@ setInterval(function() {
   } else {
     document.getElementById('number').innerText = number.toFixed(2);
   }
-}, 100);
+}, 1);
