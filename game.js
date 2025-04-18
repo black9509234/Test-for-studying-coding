@@ -4,12 +4,15 @@ let n1_producing = 1
 let n1_cost = 1;
 let n2_cost = 500;
 let n2_producing = 1;
+let n3_cost = 3000;
+let n3_decrease = 1;
 document.getElementById('number').innerText = number;
 document.getElementById('n1_cost').innerText = n1_cost;
 document.getElementById('n2_cost').innerText = n2_cost;
 document.getElementById('n1').innerText = n1;
 document.getElementById('n1_producing').innerText = n1_producing;
 document.getElementById('n2_producing').innerText = n2_producing;
+document.getElementById('n3_cost').innerText = n3_cost;
 
 function IncreaseN1() {
   if (number >= n1_cost){
@@ -35,7 +38,6 @@ function FunctionN2(){
     n2_cost *= 1.25;
   }
 
-
   document.getElementById('n1_producing').innerText = n1_producing.toFixed(2);
 
   if (n2_producing >= 100) {
@@ -45,6 +47,19 @@ function FunctionN2(){
     document.getElementById('n2_producing').innerText = n2_producing.toFixed(2);
     document.getElementById('n2_cost').innerText = n2_cost.toFixed(2);
   }
+}
+
+
+function DecreaseN2() {
+  if (number >= n3_cost) {
+    number -= n3_cost;
+    n2_cost *= 0.85;
+    n3_cost *= 1.25;
+    n3_decrease *= 1.15;
+  }
+
+  document.getElementById('n3_cost').innerText = n3_cost.toFixed;
+  document.getElementById('n3_decrease').innerText = n3_decrease.toFixed;
 }
 
 

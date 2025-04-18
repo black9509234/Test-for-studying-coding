@@ -20,7 +20,8 @@ body {
   }
   
   #n1_button,
-  #n2_button {
+  #n2_button,
+  #n3_button {
     width: 200px;
     height: 25px;
     border: 1px solid black;
