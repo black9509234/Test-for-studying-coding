@@ -13,6 +13,7 @@ document.getElementById('n1').innerText = n1;
 document.getElementById('n1_producing').innerText = n1_producing;
 document.getElementById('n2_producing').innerText = n2_producing;
 document.getElementById('n3_cost').innerText = n3_cost;
+document.getElementById('n3_decrease').innerText = n3_decrease;
 
 function IncreaseN1() {
   if (number >= n1_cost){
