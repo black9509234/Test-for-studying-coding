@@ -13,9 +13,8 @@ body {
   }
 
   #number_box {
-    width: auto;
-    height: auto;
-    margin-bottom: 20px;
+    width: 200px;
+    height: 50px;
     text-align: center;
   }
   
