@@ -49,11 +49,11 @@ function FunctionN2(){
 
 
 setInterval(function() {
-  number += n1 * n1_producing * 1000;
+  number += n1 * n1_producing * 10;
 
   if (number >= 100) {
     document.getElementById('number').innerText = Math.floor(number);
   } else {
     document.getElementById('number').innerText = number.toFixed(2);
   }
-}, 1);
+}, 100);
