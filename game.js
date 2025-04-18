@@ -31,10 +31,12 @@ function IncreaseN1(){
   if (number >= n2_cost){
     number -= n2_cost;
     n2_producing *= 1.15;
-    n1_producing *= 1.15
+    n1_producing *= 1.15;
+    n2_cost *= 1.5;
   }
 
   document.getElementById('n2_producing').innerText = n2_producing;
+  document.getElementById('n2_cost').innerText = n2_cost;
 }
 
 
