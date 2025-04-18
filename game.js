@@ -17,7 +17,7 @@ function IncreaseN1() {
 
   document.getElementById('n1').innerText = n1;
   if (n1_cost >= 100) {
-    document.getElementById('n1_cost').innerText = Math.floor(n1_cost)
+    document.getElementById('n1_cost').innerText = Math.floor(n1_cost);
   } else {
     document.getElementById('n1_cost').innerText = n1_cost.toFixed(2);
   };
