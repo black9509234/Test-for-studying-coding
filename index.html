@@ -1,100 +1,49 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>생산 게임</title>
-  <style>
-    body {
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-family: sans-serif;
-    }
-    #number {
-      font-size: 50px;
-      color: black;
-      margin-bottom: 20px;
-    }
-    .producer {
-      margin: 5px;
-      text-align: center;
-    }
-    button {
-      width: 180px;
-      margin-bottom: 4px;
-    }
-    span {
-      font-size: small;
-      color: #666;
-    }
-  </style>
-</head>
-<body>
-
-  <div id="number">0</div>
-  <div id="producers"></div>
-
-  <script>
-    let number = 1;
-
-    const producers = [
-      { id: "n1", name: "n1", count: 0, producing: 1, cost: 1 },
-      { id: "n2", name: "n2", count: 0, producing: 5, cost: 10 },
-      { id: "n3", name: "n3", count: 0, producing: 20, cost: 100 }
-    ];
-
-    // 동적으로 버튼 UI 생성
-    const producersContainer = document.getElementById("producers");
-
-    producers.forEach(p => {
-      const div = document.createElement("div");
-      div.className = "producer";
-      div.innerHTML = `
-        <button onclick="buy('${p.id}')">${p.name} 구매 / 가격: <span id="${p.id}_cost"></span></button><br>
-        <span>개당 생산량: <span id="${p.id}_producing"></span></span>
-        <span> / 개수: <span id="${p.id}_count"></span></span>
-      `;
-      producersContainer.appendChild(div);
-    });
-
-    // UI 업데이트
-    function updateUI() {
-      producers.forEach(p => {
-        document.getElementById(`${p.id}_cost`).innerText = p.cost >= 100 ? Math.floor(p.cost) : p.cost.toFixed(2);
-        document.getElementById(`${p.id}_producing`).innerText = p.producing;
-        document.getElementById(`${p.id}_count`).innerText = p.count;
-      });
-
-      document.getElementById("number").innerText = number >= 100
-        ? Math.floor(number)
-        : number.toFixed(2);
-    }
-
-    // 구매 함수
-    function buy(id) {
-      const p = producers.find(x => x.id === id);
-      if (number >= p.cost) {
-        number -= p.cost;
-        p.count++;
-        p.cost *= 1.15;
-        updateUI();
+  <head>
+    <meta charset="UTF-8"/>
+    <title>test</title>
+    <style>
+      body {
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
-    }
 
-    // 자원 자동 증가
-    setInterval(() => {
-      producers.forEach(p => {
-        number += p.count * p.producing / 10;
-      });
-      updateUI();
-    }, 100);
+      #number {
+        font-size: 50px;
+        color: black;
+      }ㅁ
 
-    // 최초 UI 초기화
-    updateUI();
-  </script>
+      #number_box {
+        width: 100px;
+        height: 50px;
+        transform: translateY(-20px);
+        text-align: center;
+      }
 
-</body>
+      #n1_button {
+        width: 150px;
+        height: 20px;
+        border: 1px solid black;
+        border-radius: 5px;
+        text-align: center;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="number_box"><span id="number"></span></div>
+    <div><button onclick="IncreaseN1()" id="n1_button" style="color: black;">
+      n1 구매 / 가격 : <span id="n1_cost"></span>
+    </button>
+    <span style="color: #bdbdbd; font-size: small;">현재 n1의 개당 생산량 : <span id="n1_producing"></span></span>
+    <span style="color: #bdbdbd; font-size: small;">/ 현재 n1의 개수 : <span id="n1"></span></span>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
 </html>
