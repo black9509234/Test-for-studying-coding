@@ -4,20 +4,13 @@ let n1_producing = 1
 let n1_cost = 1;
 let n2_cost = 500;
 let n2_producing = 1;
+document.getElementById('number').innerText = formatNumber(number);
+document.getElementById('n1_cost').innerText = formatNumber(n1_cost);
+document.getElementById('n2_cost').innerText = formatNumber(n2_cost);
+document.getElementById('n1').innerText = n1;
+document.getElementById('n1_producing').innerText = formatNumber(n1_producing);
+document.getElementById('n2_producing').innerText = formatNumber(n2_producing);
 
-function formatNumber(value) {
-    return value >= 10000 ? value.toExponential(2) : value.toFixed(2);
-  }
-  
-  function updateUI() {
-    document.getElementById('number').innerText = formatNumber(number);
-    document.getElementById('n1_cost').innerText = formatNumber(n1_cost);
-    document.getElementById('n2_cost').innerText = formatNumber(n2_cost);
-    document.getElementById('n1').innerText = n1;
-    document.getElementById('n1_producing').innerText = formatNumber(n1_producing);
-    document.getElementById('n2_producing').innerText = formatNumber(n2_producing);
-  }
-  
 function IncreaseN1() {
   if (number >= n1_cost){
     number -= n1_cost;
