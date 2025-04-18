@@ -58,10 +58,11 @@
       function IncreaseN1() {
         n1++;
       }
+
       setInterval(function() {
-        number += n1 * n1_producing
+        number += n1 * n1_producing / 10
         document.getElementById('number').innerText = number;
-      }, 1000);
+      }, 100);
     </script>
   </body>
 </html>
