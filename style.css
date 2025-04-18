@@ -28,5 +28,5 @@ body {
     text-align: center;
     transform: translateX(-50px);
     margin: 0 5px;
-    position: fixed;
+    position: absolute;
   }
