@@ -1,0 +1,28 @@
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #number {
+    font-size: 50px;
+    color: black;
+  }
+
+  #number_box {
+    width: 100px;
+    height: 50px;
+    transform: translateY(-20px);
+    text-align: center;
+  }
+
+  #n1_button {
+    width: 150px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+  }
