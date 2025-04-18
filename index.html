@@ -63,9 +63,9 @@
         number += n1 * n1_producing / 10
 
         if (number >= 100) {
-          document.getElementById('number') = Math.floor(number);
+          document.getElementById('number').innerText = Math.floor(number);
         } else {
-          document.getElementById('number') = number.toFixed(2);
+          document.getElementById('number').innerText = number.toFixed(2);
         }
       }, 100);
     </script>
