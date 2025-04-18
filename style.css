@@ -43,6 +43,7 @@ body {
 
   .tab {
     display: none;
+    transform: translateY(-100px);
   }
   
   .tab.active {
