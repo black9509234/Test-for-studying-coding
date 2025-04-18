@@ -24,8 +24,8 @@
         y: 20%;
       }
 
-      #n1 {
-        width: px;
+      #n1_button {
+        width: 60px;
         height: 20px;
         border: 1px solid black;
         border-radius: 5px;
@@ -37,11 +37,16 @@
   </head>
   <body>
     <div id="number_box"><span id="number"></span></div>
-    <div id="n1">n1 구매 / 가격 : <span id="n1_cost"></span></div>
+    <button ondblclick="IncreaseN1()" id="n1_buttton">n1 구매 / 가격 : <span id="n1_cost"></span></button>
 
     <script>
       let number = 1
-      document.getElementById('number').innerText = number
+      let n1 = 0;
+
+      function IncreaseN1() {
+        n1++;
+      }
+
     </script>
   </body>
 </html>
