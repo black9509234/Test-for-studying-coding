@@ -73,3 +73,11 @@ setInterval(function() {
     document.getElementById('number').innerText = number.toFixed(2);
   }
 }, 100);
+
+function showTab(tabName) {
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.classList.remove('active'); // 전부 숨기고
+  });
+
+  document.getElementById('tab-' + tabName).classList.add('active'); // 선택한 탭만 보이게
+}
