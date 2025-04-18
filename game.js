@@ -12,7 +12,7 @@ function IncreaseN1() {
   if (number >= n1_cost){
     number -= n1_cost;
     n1++;
-    n1_cost *= 1.15;
+    n1_cost *= 1.5;
   }
 
   document.getElementById('n1').innerText = n1;
