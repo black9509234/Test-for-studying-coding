@@ -40,3 +40,8 @@ body {
     width: 50px; /* 적절한 크기 설정 */
     text-align: right;
   }
+
+  button {
+    white-space: nowrap;
+    min-width: 250px; /* 버튼 너비 고정 또는 min-width로 안정성 확보 */
+  }
