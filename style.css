@@ -34,5 +34,5 @@ body {
     border-radius: 5px;
     text-align: center;
     transform: translateX(-50px);
-    margin: 0 5px;
+    gap: 5px;
   }
