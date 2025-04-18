@@ -16,6 +16,7 @@ function IncreaseN1() {
   }
 
   document.getElementById('n1').innerText = n1;
+  document.getElementById('n1_cost').innerText = n1_cost;
 }
 
 setInterval(function() {
