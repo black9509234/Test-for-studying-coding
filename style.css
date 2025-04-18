@@ -7,13 +7,6 @@ body {
     align-items: center;
   }
 
-  #box {
-    height: auto;
-    width: auto;
-    position: relative;
-    border: 1px solid black:
-  }
-
   #number {
     font-size: 50px;
     color: black;
@@ -34,5 +27,4 @@ body {
     border-radius: 5px;
     text-align: center;
     transform: translateX(-50px);
-    position: absolute;
   }
