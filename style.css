@@ -10,7 +10,7 @@ body {
   #box {
     height: auto;
     width: auto;
-    position: fixed;
+    position: relative;
     border: 1px solid black:
   }
 
