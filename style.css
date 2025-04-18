@@ -31,11 +31,11 @@ body {
   
   #n1_cost, #n1_producing, #n1, #n2_cost, #n2_producing {
     display: inline-block;
-    width: 50px; /* 적절한 크기 설정 */
+    width: 50px;
     text-align: right;
   }
 
   button {
     white-space: nowrap;
-    min-width: 250px; /* 버튼 너비 고정 또는 min-width로 안정성 확보 */
+    min-width: 250px;
   }
