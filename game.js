@@ -42,7 +42,7 @@ function FunctionN2(){
   document.getElementById('n1_producing').innerText = n1_producing.toFixed(2);
 
   if (n2_producing >= 100) {
-    document.getElementById('n2_producing').innerText = Math.floor(n2_producing)
+    document.getElementById('n2_producing').innerText = Math.floor(n2_producing);
     document.getElementById('n2_cost').innerText = Math.floor(n2_cost)
   } else {
     document.getElementById('n2_producing').innerText = n2_producing.toFixed(2);
