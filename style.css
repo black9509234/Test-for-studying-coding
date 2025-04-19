@@ -55,6 +55,8 @@ button {
   margin: 0 10px;
   padding: 8px 16px;
   font-size: 14px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 #gameTab {
