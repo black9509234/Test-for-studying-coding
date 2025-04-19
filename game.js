@@ -73,3 +73,16 @@ setInterval(function() {
     document.getElementById('number').innerText = number.toFixed(2);
   }
 }, 100);
+
+function showTab(tab) {
+  const game = document.getElementById('game_container');
+  const upgrade = document.getElementById('upgrade_container');
+
+  if (tab === 'game') {
+    game.style.display = 'block';
+    upgrade.style.display = 'none';
+  } else if (tab === 'upgrade') {
+    game.style.display = 'none';
+    upgrade.style.display = 'block';
+  }
+}
