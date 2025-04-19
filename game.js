@@ -77,16 +77,3 @@ setInterval(function() {
 document.addEventListener("DOMContentLoaded", function() {
   showTab('game');
 });
-
-function showTab(tab) {
-  const game = document.getElementById('game_container');
-  const upgrade = document.getElementById('upgrade_container');
-
-  if (tab === 'game') {
-    game.style.display = 'block';
-    upgrade.style.display = 'none';
-  } else if (tab === 'upgrade') {
-    game.style.display = 'none';
-    upgrade.style.display = 'block';
-  }
-}

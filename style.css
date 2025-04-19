@@ -52,15 +52,3 @@ body {
     padding: 10px 0;
     border-top: 1px solid #ccc;
   }
-  
-  #tabs button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #ddd;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  #tabs button:hover {
-    background-color: #ccc;
-  }
