@@ -68,7 +68,14 @@ function saveGame() {
 function loadGame() {
   const saved = JSON.parse(localStorage.getItem('myGameSave'));
   if (saved) {
-    Object.assign(window, saved);
+    number = saved.number;
+    n1 = saved.n1;
+    n1_producing = saved.n1_producing;
+    n1_cost = saved.n1_cost;
+    n2_cost = saved.n2_cost;
+    n2_producing = saved.n2_producing;
+    n3_cost = saved.n3_cost;
+    n3_decrease = saved.n3_decrease;
     updateUI();
     alert("게임을 불러왔습니다!");
   } else {
