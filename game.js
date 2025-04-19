@@ -66,7 +66,7 @@ function DecreaseN2() {
   } else {
   document.getElementById('n3_decrease').innerText = n3_decrease.toFixed(2);
   }
-};
+}
 
 
 setInterval(function() {
