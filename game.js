@@ -84,4 +84,3 @@ function loadGame() {
 }
 
 updateUI();
-window.addEventListener('beforeunload', gamesave)
