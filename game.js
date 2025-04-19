@@ -74,6 +74,10 @@ setInterval(function() {
   }
 }, 100);
 
+document.addEventListener("DOMContentLoaded", function() {
+  showTab('game');
+})
+
 function showTab(tab) {
   const game = document.getElementById('game_container');
   const upgrade = document.getElementById('upgrade_container');
