@@ -60,6 +60,8 @@ function DecreaseN2() {
   }
 
   document.getElementById('n3_cost').innerText = n3_cost;
+  document.getElementById('n2_cost').innerText = n2_cost;
+  document.getElementById('n3_decrease').innerText = n3_decrease
 
   if (n3_decrease >= 100) {
   document.getElementById('n3_decrease').innerText = Math.floor(n3_decrease);
