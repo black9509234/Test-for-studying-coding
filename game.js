@@ -76,7 +76,7 @@ setInterval(function() {
 
 document.addEventListener("DOMContentLoaded", function() {
   showTab('game');
-})
+});
 
 function showTab(tab) {
   const game = document.getElementById('game_container');
