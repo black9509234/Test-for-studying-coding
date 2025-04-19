@@ -54,7 +54,7 @@ function FunctionN2(){
 function DecreaseN2() {
   if (number >= n3_cost) {
     number -= n3_cost;
-    n2_cost *= 0.85;
+    n2_cost /= 1.15;
     n3_cost *= 1.25;
     n3_decrease *= 1.15;
   }
