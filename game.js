@@ -59,14 +59,14 @@ function DecreaseN2() {
     n3_decrease *= 1.15;
   }
 
-  document.getElementById('n3_cost').innerText = n3_cost;
-  document.getElementById('n2_cost').innerText = n2_cost;
-  document.getElementById('n3_decrease').innerText = n3_decrease
-
   if (n3_decrease >= 100) {
   document.getElementById('n3_decrease').innerText = Math.floor(n3_decrease);
+  document.getElementById('n3_cost').innerText = Math.floor(n3_cost);
+  document.getElementById('n2_cost').innerText = Math.floor(2)
   } else {
   document.getElementById('n3_decrease').innerText = n3_decrease.toFixed(2);
+  document.getElementById('n3_cost').innerText = n3_cost.toFixed(2)
+  document.getElementById('n2_cost').innerText = n2_cost.toFixed(2)
   }
 }
 
