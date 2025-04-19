@@ -1,59 +1,68 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>game</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-      <div id="container">
-        <div id="tabMenu">
-          <button class="tabButton" onclick="showTab('gameTab')">게임</button>
-          <button class="tabButton" onclick="showTab('upgradeTab')">업그레이드</button>
-          <button class="tabButton" onclick="showTab('optionTab')">옵션</button>
-        </div>
-    
-        <div id="tabContent">
-          <div id="gameTab" class="tab">
-            <div id="number_box"><span id="number"></span>n</div>
+    <div id="gameTab" class="tab">
+      <div id="number_box"><span id="number"></span>n</div>
 
       <div id="box">
-        <button onclick="IncreaseN1()" id="n1_button">n1 구매 / 가격 : <span id="n1_cost"></span></button>
+        <button onclick="IncreaseN1()" id="n1_button">
+          n1 구매 / 가격 : <span id="n1_cost"></span>
+        </button>
       </div>
 
       <div>
-        <span style="color: #bdbdbd; font-size: small;">현재 n1의 1개당 초당 생산량 : <span id="n1_producing"></span>n / 현재 n1 개수 : <span id="n1"></span></span>
+        <span style="color: #bdbdbd; font-size: small;">
+          현재 n1의 1개당 초당 생산량 : <span id="n1_producing"></span>n /
+          현재 n1 개수 : <span id="n1"></span>
+        </span>
       </div>
 
       <div>
-        <button id="n2_button" onclick="FunctionN2()">n2 구매 / 가격 : <span id="n2_cost"></span></button>
+        <button id="n2_button" onclick="FunctionN2()">
+          n2 구매 / 가격 : <span id="n2_cost"></span>
+        </button>
       </div>
 
       <div>
-        <span style="color: #bdbdbd; font-size: small;">n1의 생산량을 증가시킵니다. / 현재 증가량 : <span id="n2_producing"></span>배</span>
+        <span style="color: #bdbdbd; font-size: small;">
+          n1의 생산량을 증가시킵니다. / 현재 증가량 : <span id="n2_producing"></span>배
+        </span>
       </div>
 
       <div>
-        <button onclick="DecreaseN2()" id="n3_button">n3 구매 / 가격 : <span id="n3_cost"></span></button>
+        <button onclick="DecreaseN2()" id="n3_button">
+          n3 구매 / 가격 : <span id="n3_cost"></span>
+        </button>
       </div>
 
       <div>
-        <span style="color: #bdbdbd; font-size: small;">n2의 가격을 줄입니다. / 현재 감소량 : <span id="n3_decrease"></span>배</span>
+        <span style="color: #bdbdbd; font-size: small;">
+          n2의 가격을 줄입니다. / 현재 감소량 : <span id="n3_decrease"></span>배
+        </span>
       </div>
     </div>
 
-          </div>
-    
-          <div id="upgradeTab" class="tab" style="display: none;">
-            <p>업그레이드 준비 중...</p>
-          </div>
-    
-          <div id="optionTab" class="tab" style="display: none;">
-            <button onclick="saveGame()">저장</button>
-            <button onclick="loadGame()">불러오기</button>
-          </div>
-        </div>
-      </div>
+    <div id="upgradeTab" class="tab" style="display: none;">
+      <p>업그레이드 탭 (기획 전)</p>
+    </div>
+
+    <div id="optionTab" class="tab" style="display: none;">
+      <button onclick="saveGame()">저장</button>
+      <button onclick="loadGame()">불러오기</button>
+    </div>
+
+    <!-- 탭 버튼들 (아래에 위치) -->
+    <div id="tabMenu">
+      <button onclick="showTab('gameTab')">게임</button>
+      <button onclick="showTab('upgradeTab')">업그레이드</button>
+      <button onclick="showTab('optionTab')">옵션</button>
+    </div>
+
     <script src="game.js"></script>
   </body>
 </html>

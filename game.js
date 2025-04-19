@@ -52,13 +52,11 @@ setInterval(() => {
   updateUI();
 }, 100);
 
-// 탭 전환 함수
 function showTab(tabId) {
   document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
   document.getElementById(tabId).style.display = 'block';
 }
 
-// 저장
 function saveGame() {
   const saveData = {
     number, n1, n1_producing, n1_cost, n2_cost, n2_producing, n3_cost, n3_decrease
@@ -67,7 +65,6 @@ function saveGame() {
   alert("게임이 저장되었습니다!");
 }
 
-// 불러오기
 function loadGame() {
   const saved = JSON.parse(localStorage.getItem('myGameSave'));
   if (saved) {
@@ -79,5 +76,4 @@ function loadGame() {
   }
 }
 
-// 초기화
 updateUI();
