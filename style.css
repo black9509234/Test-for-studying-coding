@@ -1,11 +1,35 @@
 body {
-  height: 100vh;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: sans-serif;
   position: relative;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+
+.tab {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.tab.active {
+  display: flex;
 }
 
 #number {
@@ -42,6 +66,13 @@ button {
   min-width: 250px;
 }
 
+.info-line {
+  color: #bdbdbd;
+  font-size: small;
+  display: flex;
+  align-items: center;
+}
+
 #tabMenu {
   position: fixed;
   bottom: 0;
@@ -59,24 +90,4 @@ button {
   border: 1px solid black;
   border-radius: 5px;
   color: black;
-}
-
-#gameTab {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.tab {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
