@@ -1,53 +1,35 @@
 body {
-  height: 100vh;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   font-family: sans-serif;
 }
 
-#tabs {
+#container {
+  height: 100vh;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#tabMenu {
+  width: 100%;
+  text-align: center;
+  background-color: #f2f2f2;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.tabButton {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+#tabContent {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.tab {
-  margin-top: 20px;
-}
-
-#number {
-  font-size: 50px;
-  color: black;
-}
-
-#number_box {
-  width: 200px;
-  height: 50px;
-  text-align: center;
-  transform: translateY(-50px);
-}
-
-#n1_button,
-#n2_button,
-#n3_button {
-  width: 200px;
-  height: 25px;
-  border: 1px solid black;
-  border-radius: 5px;
-  text-align: center;
-  margin: 5px 0;
-}
-
-#n1_cost, #n1_producing, #n1, #n2_cost, #n2_producing, #n3_decrease, #n3_cost {
-  display: inline-block;
-  width: 50px;
-  text-align: right;
-}
-
-button {
-  white-space: nowrap;
-  min-width: 150px;
+  width: 100%;
 }
