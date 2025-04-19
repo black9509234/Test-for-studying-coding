@@ -28,6 +28,7 @@ body {
     border-radius: 5px;
     text-align: center;
     transform: translateX(-50px);
+    margin: 10px 0;
   }
   
   #n1_cost, #n1_producing, #n1, #n2_cost, #n2_producing, #n3_decrease, #n3_cost {
