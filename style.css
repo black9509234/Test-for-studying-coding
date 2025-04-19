@@ -1,54 +1,53 @@
 body {
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+}
 
-  #number {
-    font-size: 50px;
-    color: black;
-  }
+#tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
 
-  #number_box {
-    width: 200px;
-    height: 50px;
-    text-align: center;
-    transform: translateY(-50px);
-  }
-  
-  #n1_button,
-  #n2_button,
-  #n3_button {
-    width: 200px;
-    height: 25px;
-    border: 1px solid black;
-    border-radius: 5px;
-    text-align: center;
-    margin: 5px 0;
-  }
-  
-  #n1_cost, #n1_producing, #n1, #n2_cost, #n2_producing, #n3_decrease, #n3_cost {
-    display: inline-block;
-    width: 50px;
-    text-align: right;
-  }
+.tab {
+  margin-top: 20px;
+}
 
-  button {
-    white-space: nowrap;
-    min-width: 250px;
-  }
+#number {
+  font-size: 50px;
+  color: black;
+}
 
-  #tabs {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #eee;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px 0;
-    border-top: 1px solid #ccc;
-  }
+#number_box {
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  transform: translateY(-50px);
+}
+
+#n1_button,
+#n2_button,
+#n3_button {
+  width: 200px;
+  height: 25px;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-align: center;
+  margin: 5px 0;
+}
+
+#n1_cost, #n1_producing, #n1, #n2_cost, #n2_producing, #n3_decrease, #n3_cost {
+  display: inline-block;
+  width: 50px;
+  text-align: right;
+}
+
+button {
+  white-space: nowrap;
+  min-width: 150px;
+}
