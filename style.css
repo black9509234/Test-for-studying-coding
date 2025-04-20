@@ -113,12 +113,3 @@ button {
   border: 1.5px solid black;
   border-radius: 5px;
 }
-
-#upgradeTab {
-  display: none !important;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 500px;
-}
