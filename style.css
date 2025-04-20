@@ -96,12 +96,14 @@ button {
   width: 200px;
   height: 30px;
   text-align: center;
+  margin: 10px 0;
 }
 
 #saveGame {
   width: 200px;
   height: 30px;
   text-align: center;
+  margin: 10px 0;
 }
 
 #upgrade1 {
