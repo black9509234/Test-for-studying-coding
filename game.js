@@ -120,8 +120,8 @@ function Upgrade1() {
     n1_producing_upgrade1_cost *= 1.25;
     n1_producing *= 1.15;
     n1_producing_upgrade1 *= 1.15;
-    updateUI()
-  }
+  };
+  updateUI()
 }
 
 updateUI();
