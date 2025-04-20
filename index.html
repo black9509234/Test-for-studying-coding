@@ -17,7 +17,7 @@
         </div>
 
         <div>
-          <span class="info-line" style="color: #bdbdbd;">
+          <span class="info-line">
             현재 n1의 1개당 초당 생산량 : <span id="n1_producing"></span>n /
             현재 n1 개수 : <span id="n1"></span>
           </span>
@@ -30,7 +30,7 @@
         </div>
 
         <div>
-          <span class="info-line" style="color: #bdbdbd;">
+          <span class="info-line">
             n1의 생산량을 증가시킵니다. / 현재 증가량 : <span id="n2_producing"></span>배
           </span>
         </div>
@@ -42,7 +42,7 @@
         </div>
 
         <div>
-          <span class="info-line" style="color: #bdbdbd">
+          <span class="info-line">
             n2의 가격을 줄입니다. / 현재 감소량 : <span id="n3_decrease"></span>배
           </span>
         </div>
@@ -51,9 +51,15 @@
       <div id="upgradeTab" class="tab">
         <div>
           <button id="upgrade1" onclick="Upgrade1()">
+            <div>
             <span style="font-size: small; color: black;">n1의 생산량을 1.5배 늘립니다.</span>
+            </div>
+            <div>
             <span id="info-line">가격 : <span id="n1_producing_upgrade1_cost"></span>n</span>
+            </div>
+            <div>
             <span id="info-line">현재 증가량 : <span id="n1_producing_upgrade1"></span>배</span>
+            </div>
           </button>
         </div>
       </div>
