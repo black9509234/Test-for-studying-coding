@@ -15,7 +15,7 @@ function updateUI() {
   document.getElementById('n2_cost').innerText = n2_cost >= 100 ? Math.floor(n2_cost) : n2_cost.toFixed(2);
   document.getElementById('n3_cost').innerText = n3_cost.toFixed(0);
   document.getElementById('n1').innerText = n1;
-  document.getElementById('n1_producing').innerText = n1_producing >= 100 ? Mathfloor(n1_producing) : n1_producing.toFixed(2);
+  document.getElementById('n1_producing').innerText = n1_producing >= 100 ? Math.floor(n1_producing) : n1_producing.toFixed(2);
   document.getElementById('n2_producing').innerText = n2_producing >= 100 ? Math.floor(n2_producing) : n2_producing.toFixed(2);
   document.getElementById('n3_decrease').innerText = n3_decrease >= 100 ? Math.floor(n3_decrease) : n3_decrease.toFixed(2);
   document.getElementById('n1_producing_upgrade1').innerText = Math.floor(n1_producing_upgrade1);
@@ -74,7 +74,8 @@ function showTab(tabId) {
 function saveGame() {
   showConfirmModal("정말 저장하시겠습니까?", () => {
     const saveData = {
-      number, n1, n1_producing, n1_cost, n2_cost, n2_producing, n3_cost, n3_decrease
+      number, n1, n1_producing, n1_cost, n2_cost, n2_producing, n3_cost, n3_decrease,
+      n1_producing_upgrade1, n1_producing_upgrade1_cost
     };
     localStorage.setItem('myGameSave', JSON.stringify(saveData));
     alert("게임이 저장되었습니다!");
@@ -93,6 +94,8 @@ function loadGame() {
       n2_producing = saved.n2_producing;
       n3_cost = saved.n3_cost;
       n3_decrease = saved.n3_decrease;
+      n1_producing_upgrade1 = saved.n1_producing_upgrade1 ?? 1;
+      n1_producing_upgrade1_cost = saved.n1_producing_upgrade1_cost ?? 5000;
       updateUI();
       alert("게임을 불러왔습니다!");
     } else {
@@ -122,16 +125,6 @@ function showConfirmModal(message, onConfirm) {
   document.getElementById("confirmNo").onclick = () => {
     modal.remove();
   };
-}
-
-function Upgrade1() {
-  if (number >= 5000) {
-    number -= n1_producing_upgrade1_cost;
-    n1_producing_upgrade1_cost *= 1.25;
-    n1_producing *= 1.15;
-    n1_producing_upgrade1 *= 1.15;
-  };
-  updateUI()
 }
 
 updateUI();
