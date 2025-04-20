@@ -22,7 +22,7 @@ function IncreaseN1() {
   if (number >= n1_cost) {
     number -= n1_cost;
     n1++;
-    n1_cost *= 1.25;
+    n1_cost *= 1.15;
   }
   updateUI();
 }
@@ -32,7 +32,7 @@ function FunctionN2() {
     number -= n2_cost;
     n2_producing *= 1.15;
     n1_producing *= 1.15;
-    n2_cost *= 1.25;
+    n2_cost *= 1.35;
   }
   updateUI();
 }
@@ -41,7 +41,7 @@ function DecreaseN2() {
   if (number >= n3_cost) {
     number -= n3_cost;
     n2_cost *= 0.85;
-    n3_cost *= 1.25;
+    n3_cost *= 1.35;
     n3_decrease *= 1.15;
   }
   updateUI();
