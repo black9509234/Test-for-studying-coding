@@ -6,6 +6,8 @@ let n2_cost = 500;
 let n2_producing = 1;
 let n3_cost = 1500;
 let n3_decrease = 1;
+let n1_producing_upgrade1 = 1;
+let n1_producing_upgrade1_cost = 5000;
 
 function updateUI() {
   document.getElementById('number').innerText = number >= 100 ? Math.floor(number) : number.toFixed(2);
@@ -16,6 +18,8 @@ function updateUI() {
   document.getElementById('n1_producing').innerText = n1_producing >= 100 ? Mathfloor(n1_producing) : n1_producing.toFixed(2);
   document.getElementById('n2_producing').innerText = n2_producing >= 100 ? Math.floor(n2_producing) : n2_producing.toFixed(2);
   document.getElementById('n3_decrease').innerText = n3_decrease >= 100 ? Math.floor(n3_decrease) : n3_decrease.toFixed(2);
+  document.getElementById('n1_producing_upgrade1').innerText = Math.floor(n1_producing_upgrade1)
+  document.getElementById('n1_producing_upgrade1_cost').innerText = Math.floor(n1_producing_upgrade1_cost)
 }
 
 function IncreaseN1() {
@@ -108,6 +112,16 @@ function showConfirmModal(message, onConfirm) {
   document.getElementById("confirmNo").onclick = () => {
     modal.remove();
   };
+}
+
+function Upgrade1() {
+  if (number >= 5000) {
+    number -= n1_producing_upgrade1_cost;
+    n1_producing_upgrade1_cost *= 1.25;
+    n1_producing *= 1.15;
+    n1_producing_upgrade1 *= 1.15;
+    updateUI()
+  }
 }
 
 updateUI();
