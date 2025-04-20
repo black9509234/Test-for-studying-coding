@@ -18,8 +18,8 @@ function updateUI() {
   document.getElementById('n1_producing').innerText = n1_producing >= 100 ? Mathfloor(n1_producing) : n1_producing.toFixed(2);
   document.getElementById('n2_producing').innerText = n2_producing >= 100 ? Math.floor(n2_producing) : n2_producing.toFixed(2);
   document.getElementById('n3_decrease').innerText = n3_decrease >= 100 ? Math.floor(n3_decrease) : n3_decrease.toFixed(2);
-  document.getElementById('n1_producing_upgrade1').innerText = Math.floor(n1_producing_upgrade1)
-  document.getElementById('n1_producing_upgrade1_cost').innerText = Math.floor(n1_producing_upgrade1_cost)
+  document.getElementById('n1_producing_upgrade1').innerText = Math.floor(n1_producing_upgrade1);
+  document.getElementById('n1_producing_upgrade1_cost').innerText = Math.floor(n1_producing_upgrade1_cost);
 }
 
 function IncreaseN1() {
