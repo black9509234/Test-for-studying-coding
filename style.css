@@ -20,7 +20,7 @@ body {
 }
 
 .tab {
-  display: none;
+  display: none !important;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -29,7 +29,7 @@ body {
 }
 
 .tab.active {
-  display: flex;
+  display: flex !important;
 }
 
 #number {
@@ -112,5 +112,5 @@ button {
   color: black;
   border: 1.5px solid black;
   border-radius: 5px;
-  
+
 }
