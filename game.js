@@ -51,6 +51,15 @@ function DecreaseN2() {
   updateUI();
 }
 
+function Upgrade1() {
+  if (number >= n1_producing_upgrade1_cost) {
+    number -= n1_producing_upgrade1_cost;
+    n1_producing *= 1.15;
+    n1_producing_upgrade1 *= 1.25;
+  }
+  updateUI()
+}
+
 setInterval(() => {
   number += (n1 * n1_producing) / 10;
   updateUI();
