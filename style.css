@@ -117,7 +117,6 @@ button {
 }
 
 #upgrade1 {
-  position: absolute;
   width: 100px;
   height: 100px;
   display: flex;
@@ -127,8 +126,12 @@ button {
   color: black;
   border: 1.5px solid black;
   border-radius: 5px;
-  transform: translateX(-50%);
-  transform: translateY(-50%);
+
+  position: absolute;
+  top: 30%;
+  left: 25%;
+  z-index: 999;
+  transform: translate(-50%, -50%);
 }
 
 .modal-overlay {
