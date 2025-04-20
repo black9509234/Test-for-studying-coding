@@ -13,7 +13,7 @@ function updateUI() {
   document.getElementById('n2_cost').innerText = n2_cost >= 100 ? Math.floor(n2_cost) : n2_cost.toFixed(2);
   document.getElementById('n3_cost').innerText = n3_cost.toFixed(0);
   document.getElementById('n1').innerText = n1;
-  document.getElementById('n1_producing').innerText = n1_producing.toFixed(2);
+  document.getElementById('n1_producing').innerText = n1_producing >= 100 ? Mathfloor(n1_producing) : n1_producing.toFixed(2);
   document.getElementById('n2_producing').innerText = n2_producing >= 100 ? Math.floor(n2_producing) : n2_producing.toFixed(2);
   document.getElementById('n3_decrease').innerText = n3_decrease >= 100 ? Math.floor(n3_decrease) : n3_decrease.toFixed(2);
 }

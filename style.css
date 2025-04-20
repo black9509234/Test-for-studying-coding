@@ -120,10 +120,13 @@ button {
   width: 100px;
   height: 100px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   color: black;
   border: 1.5px solid black;
   border-radius: 5px;
+  
 }
 
 .modal-overlay {
