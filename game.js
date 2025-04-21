@@ -93,7 +93,7 @@ function DecreaseN1Cost() {
 
 // 자동 자원 증가
 setInterval(() => {
-  number += (n1 * n1_producing) * 10;
+  number += (n1 * n1_producing) / 10;
   updateUI();
 }, 100);
 
