@@ -1,130 +1,87 @@
-let number = 1;
-let n1 = 0;
-let n1_producing = 1;
-let n1_cost = 1;
-let n2_cost = 500;
-let n2_producing = 1;
-let n3_cost = 1500;
-let n3_decrease = 1;
-let n1_producing_upgrade1 = 1;
-let n1_producing_upgrade1_cost = 5000;
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="gameTab" class="tab active">
+        <div id="number_box"><span id="number"></span>n</div>
 
-function updateUI() {
-  document.getElementById('number').innerText = number >= 100 ? Math.floor(number) : number.toFixed(2);
-  document.getElementById('n1_cost').innerText = n1_cost >= 100 ? Math.floor(n1_cost) : n1_cost.toFixed(2);
-  document.getElementById('n2_cost').innerText = n2_cost >= 100 ? Math.floor(n2_cost) : n2_cost.toFixed(2);
-  document.getElementById('n3_cost').innerText = n3_cost.toFixed(0);
-  document.getElementById('n1').innerText = n1;
-  document.getElementById('n1_producing').innerText = n1_producing >= 100 ? Math.floor(n1_producing) : n1_producing.toFixed(2);
-  document.getElementById('n2_producing').innerText = n2_producing >= 100 ? Math.floor(n2_producing) : n2_producing.toFixed(2);
-  document.getElementById('n3_decrease').innerText = n3_decrease >= 100 ? Math.floor(n3_decrease) : n3_decrease.toFixed(2);
-  document.getElementById('n1_producing_upgrade1').innerText = n1_producing_upgrade1 >= 100 ? Math.floor(n1_producing_upgrade1) : n1_producing_upgrade1.toFixed(2);
-  document.getElementById('n1_producing_upgrade1_cost').innerText = Math.floor(n1_producing_upgrade1_cost);
-}
+        <div id="box">
+          <button onclick="IncreaseN1()" id="n1_button" style="color: black;">
+            n1 구매 / 가격 : <span id="n1_cost"></span>
+          </button>
+        </div>
 
-function IncreaseN1() {
-  if (number >= n1_cost) {
-    number -= n1_cost;
-    n1++;
-    n1_cost *= 1.2;
-  }
-  updateUI();
-}
+        <div>
+          <span class="info-line">
+            현재 n1의 1개당 초당 생산량 : <span id="n1_producing"></span>n /
+            현재 n1 개수 : <span id="n1"></span>
+          </span>
+        </div>
 
-function FunctionN2() {
-  if (number >= n2_cost) {
-    number -= n2_cost;
-    n2_producing *= 1.15;
-    n1_producing *= 1.15;
-    n2_cost *= 1.35;
-  }
-  updateUI();
-}
+        <div>
+          <button id="n2_button" onclick="FunctionN2()" style="color: black;">
+            n2 구매 / 가격 : <span id="n2_cost"></span>
+          </button>
+        </div>
 
-function DecreaseN2() {
-  if (number >= n3_cost) {
-    number -= n3_cost;
-    n2_cost *= 0.85;
-    n3_cost *= 1.35;
-    n3_decrease *= 1.15;
-  }
-  updateUI();
-}
+        <div>
+          <span class="info-line">
+            n1의 생산량을 증가시킵니다. / 현재 증가량 : <span id="n2_producing"></span>배
+          </span>
+        </div>
 
-function Upgrade1() {
-  if (number >= n1_producing_upgrade1_cost) {
-    number -= n1_producing_upgrade1_cost;
-    n1_producing *= 1.15;
-    n1_producing_upgrade1 *= 1.15;
-    n1_producing_upgrade1_cost *= 1.25;
-  }
-  updateUI()
-}
+        <div>
+          <button onclick="DecreaseN2()" id="n3_button" style="color: black;">
+            n3 구매 / 가격 : <span id="n3_cost"></span>
+          </button>
+        </div>
 
-setInterval(() => {
-  number += (n1 * n1_producing) / 10;
-  updateUI();
-}, 100);
+        <div>
+          <span class="info-line">
+            n2의 가격을 줄입니다. / 현재 감소량 : <span id="n3_decrease"></span>배
+          </span>
+        </div>
+      </div>
 
-function showTab(tabId) {
-  document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-}
+      <div id="upgradeTab" class="tab">
+        <div>
+          <button id="upgrade1" onclick="Upgrade1()">
+            <div><span style="font-size: small; color: black;">n1의 생산량을 1.5배 늘립니다.</span></div>
+            <div><span class="info-line">가격 : <span id="n1_producing_upgrade1_cost"></span>n</span></div>
+            <div><span class="info-line">현재 증가량 : <span id="n1_producing_upgrade1"></span>배</span></div>
+          </button>
+        </div>
 
-function saveGame() {
-  showConfirmModal("정말 저장하시겠습니까?", () => {
-    const saveData = {
-      number, n1, n1_producing, n1_cost, n2_cost, n2_producing, n3_cost, n3_decrease,
-      n1_producing_upgrade1, n1_producing_upgrade1_cost
-    };
-    localStorage.setItem('myGameSave', JSON.stringify(saveData));
-    alert("게임이 저장되었습니다!");
-  });
-}
+        <div>
+            <button id="upgrade2" onclick="Upgrade2()">
+             <div><span style="font-size: small; color: black;">n1의 가격을 2배 낮춥니다.</span></div>
+             <div><span class="info-line">가격 : <span id="n1_cost_decrease_cost"></span>n</span></div>
+             <div><span class="info-line">현재 감소량 : <span id="n1_cost_decrease"></span>배</span></div>
+            </button>
+        </div>
+      </div>
 
-function loadGame() {
-  showConfirmModal("저장된 게임을 불러오시겠습니까?", () => {
-    const saved = JSON.parse(localStorage.getItem('myGameSave'));
-    if (saved) {
-      number = saved.number;
-      n1 = saved.n1;
-      n1_producing = saved.n1_producing;
-      n1_cost = saved.n1_cost;
-      n2_cost = saved.n2_cost;
-      n2_producing = saved.n2_producing;
-      n3_cost = saved.n3_cost;
-      n3_decrease = saved.n3_decrease;
-      n1_producing_upgrade1 = saved.n1_producing_upgrade1 ?? 1;
-      n1_producing_upgrade1_cost = saved.n1_producing_upgrade1_cost ?? 5000;
-      updateUI();
-      alert("게임을 불러왔습니다!");
-    } else {
-      alert("저장된 게임이 없습니다.");
-    }
-  });
-}
-
-function showConfirmModal(message, onConfirm) {
-  const modal = document.createElement("div");
-  modal.className = "modal-overlay";
-  modal.innerHTML = `
-    <div class="modal-box">
-      <p>${message}</p>
-      <div class="modal-buttons">
-        <button id="confirmYes">예</button>
-        <button id="confirmNo">아니오</button>
+      <div id="optionTab" class="tab">
+        <button onclick="saveGame()"
+        style="display: flex; align-items: center; color: black; border: 1px solid black; border-radius: 5px;"
+        id="saveGame">저장</button>
+        <button onclick="loadGame()"
+        style="display: flex; align-items: center; color: black; border: 1px solid black; border-radius: 5px;"
+        id="loadGame">불러오기</button>
       </div>
     </div>
-  `;
-  document.body.appendChild(modal);
 
-  document.getElementById("confirmYes").onclick = () => {
-    onConfirm();
-    modal.remove();
-  };
-  document.getElementById("confirmNo").onclick = () => {
-    modal.remove();
-  };
-}
+    <div id="tabMenu">
+      <button onclick="showTab('gameTab')">게임</button>
+      <button onclick="showTab('upgradeTab')">업그레이드</button>
+      <button onclick="showTab('optionTab')">옵션</button>
+    </div>
 
-updateUI();
+    <script src="game.js"></script>
+  </body>
+</html>
