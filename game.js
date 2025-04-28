@@ -11,17 +11,14 @@ let n1_producing_upgrade1_cost = 5000;
 let n1_cost_decrease = 1;
 let n1_cost_decrease_cost = 5000;
 
-// 숫자 포맷: 크거나 작으면 지수 표기, 아니면 고정 소수점
 function formatNumberScientific(num) {
   return num >= 1e5 || num < 1e-2 ? num.toExponential(2) : num.toFixed(2);
 }
 
-// 텍스트 업데이트 헬퍼
 function updateText(id, value) {
   document.getElementById(id).innerText = formatNumberScientific(value);
 }
 
-// UI 전체 업데이트
 function updateUI() {
   updateText('number', number);
   updateText('n1_cost', n1_cost);
@@ -37,7 +34,6 @@ function updateUI() {
   updateText('n1_cost_decrease_cost', n1_cost_decrease_cost);
 }
 
-// 기본 업그레이드: n1 구매
 function IncreaseN1() {
   if (number >= n1_cost) {
     number -= n1_cost;
@@ -47,7 +43,6 @@ function IncreaseN1() {
   updateUI();
 }
 
-// n2: 생산량 배수 증가
 function UpgradeN2() {
   if (number >= n2_cost) {
     number -= n2_cost;
@@ -58,7 +53,6 @@ function UpgradeN2() {
   updateUI();
 }
 
-// n3: n2의 가격 감소
 function DecreaseN2Cost() {
   if (number >= n3_cost) {
     number -= n3_cost;
@@ -69,7 +63,6 @@ function DecreaseN2Cost() {
   updateUI();
 }
 
-// 생산량 업그레이드
 function UpgradeProducing() {
   if (number >= n1_producing_upgrade1_cost) {
     number -= n1_producing_upgrade1_cost;
@@ -80,7 +73,6 @@ function UpgradeProducing() {
   updateUI();
 }
 
-// n1 가격 감소 업그레이드
 function DecreaseN1Cost() {
   if (number >= n1_cost_decrease_cost) {
     number -= n1_cost_decrease_cost;
@@ -91,19 +83,16 @@ function DecreaseN1Cost() {
   updateUI();
 }
 
-// 자동 자원 증가
 setInterval(() => {
   number += (n1 * n1_producing) / 10;
   updateUI();
 }, 100);
 
-// 탭 전환
 function showTab(tabId) {
   document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
   document.getElementById(tabId).classList.add('active');
 }
 
-// 저장
 function saveGame() {
   showConfirmModal("정말 저장하시겠습니까?", () => {
     const saveData = {
@@ -117,7 +106,6 @@ function saveGame() {
   });
 }
 
-// 불러오기
 function loadGame() {
   showConfirmModal("저장된 게임을 불러오시겠습니까?", () => {
     const saved = JSON.parse(localStorage.getItem('myGameSave'));
@@ -136,7 +124,6 @@ function loadGame() {
   });
 }
 
-// 확인 모달
 function showConfirmModal(message, onConfirm) {
   const modal = document.createElement("div");
   modal.className = "modal-overlay";
@@ -160,5 +147,4 @@ function showConfirmModal(message, onConfirm) {
   };
 }
 
-// 초기화
 updateUI();
