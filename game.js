@@ -84,7 +84,7 @@
     }
 
     setInterval(() => {
-      number += (n1 * n1_producing) / 20;  // 생산량 줄여 속도 조절
+      number += (n1 * n1_producing) / 10;  // 생산량 줄여 속도 조절
       updateUI();
     }, 100);
 
