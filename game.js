@@ -10,6 +10,8 @@
     let n1_producing_upgrade1_cost = 5000;
     let n1_cost_decrease = 1;
     let n1_cost_decrease_cost = 5000;
+    let upgrade3_cost = 7500;
+    let upgrade3_total_increase = 1;
 
     function formatNumberScientific(num) {
       return num >= 1e5 || num < 1e-2 ? num.toExponential(2) : num.toFixed(2);
@@ -32,6 +34,8 @@
       updateText('n1_producing_upgrade1_cost', n1_producing_upgrade1_cost);
       updateText('n1_cost_decrease', n1_cost_decrease);
       updateText('n1_cost_decrease_cost', n1_cost_decrease_cost);
+      updateText('upgrade3_cost', upgrade3_cost);
+      updateText('upgrade3_total_increase', upgrade3_total_increase);
     }
 
     function IncreaseN1() {
@@ -83,6 +87,17 @@
       updateUI();
     }
 
+    function IncreaseU1U2() {
+      if (number >= 7500) {
+        number -= upgrade3_cost;
+        upgrade3_cost *= 1.1;
+        upgrade3_total_increase *= 1.1;
+        n2_producing *= 1.1;
+        n3_decrease *= 1.1;
+      }
+      updateUI();
+    }
+
     setInterval(() => {
       number += (n1 * n1_producing) / 10;  // 생산량 줄여 속도 조절
       updateUI();
@@ -99,7 +114,7 @@
           number, n1, n1_producing, n1_cost,
           n2_cost, n2_producing, n3_cost, n3_decrease,
           n1_producing_upgrade1, n1_producing_upgrade1_cost,
-          n1_cost_decrease, n1_cost_decrease_cost
+          n1_cost_decrease, n1_cost_decrease_cost, upgrade3_cost, upgrade3_total_increase
         };
         localStorage.setItem('myGameSave', JSON.stringify(saveData));
         alert("게임이 저장되었습니다!");
@@ -114,7 +129,7 @@
             number, n1, n1_producing, n1_cost,
             n2_cost, n2_producing, n3_cost, n3_decrease,
             n1_producing_upgrade1, n1_producing_upgrade1_cost,
-            n1_cost_decrease, n1_cost_decrease_cost
+            n1_cost_decrease, n1_cost_decrease_cost, upgrade3_cost, upgrade3_total_increase
           } = saved);
           updateUI();
           alert("게임을 불러왔습니다!");

@@ -164,7 +164,8 @@ button:active {
 }
 
 #upgrade1,
-#upgrade2 {
+#upgrade2,
+#upgrade3 {
   width: 100px;
   height: 100px;
   color: black;
@@ -194,15 +195,23 @@ button:active {
   transform: translate(-50%, -50%);
 }
 
+#upgrade3 {
+  top: 20%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+}
+
 #upgrade1:hover,
-#upgrade2:hover {
+#upgrade2:hover,
+#upgrade3:hover {
   background-color: #e0e0e0;
   transform: translate(-50%, -52%);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #upgrade1:active,
-#upgrade2:active {
+#upgrade2:active,
+#upgrade3:active {
   background-color: #d0d0d0;
   transform: translate(-50%, -48%);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
