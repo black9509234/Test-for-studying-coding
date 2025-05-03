@@ -87,7 +87,7 @@
       updateUI();
     }
 
-    function IncreaseU1U2() {
+    function IncreaseN1N2() {
       if (number >= 7500) {
         number -= upgrade3_cost;
         upgrade3_cost *= 1.1;
