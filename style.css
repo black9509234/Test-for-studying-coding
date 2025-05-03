@@ -194,29 +194,28 @@ body {
     color: black;
   }
 
-  /* 마우스 포인터 */
-button, #n1_button, #n2_button, #n3_button {
+  /* 모든 버튼에 커서 포인터와 부드러운 애니메이션 */
+button, 
+#n1_button, #n2_button, #n3_button,
+.modal-buttons button {
   cursor: pointer;
-  transition: transform 0.1s ease, background-color 0.2s;
+  transition: transform 0.1s ease, background-color 0.2s, box-shadow 0.2s;
 }
 
-/* hover 효과 */
-button:hover, #n1_button:hover, #n2_button:hover, #n3_button:hover {
+/* 마우스를 올렸을 때 */
+button:hover, 
+#n1_button:hover, #n2_button:hover, #n3_button:hover,
+.modal-buttons button:hover {
   background-color: #ddd;
   transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-/* 클릭 시 눌림 효과 */
-button:active, #n1_button:active, #n2_button:active, #n3_button:active {
+/* 클릭 시 눌린 듯한 효과 */
+button:active, 
+#n1_button:active, #n2_button:active, #n3_button:active,
+.modal-buttons button:active {
+  background-color: #bbb;
   transform: translateY(1px);
-  background-color: #ccc;
-}
-
-/* 탭 메뉴에서 활성화된 버튼 강조 */
-#tabMenu button.active-tab {
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  transform: scale(1.05);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
 }
